@@ -8,7 +8,7 @@ const Input = (props) => {
                 style={styles.input}
                 value={props.value}
                 placeholder={props.placeholder}
-                onChangeText={text => props.setState(text)}
+                onChangeText={text => props.handler(text, props.text)}
                 placeholderTextColor='white' 
                 secureTextEntry={props.isPassword}
                 keyboardType={props.type}
