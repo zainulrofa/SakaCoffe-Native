@@ -24,7 +24,7 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
         alignItems: 'center',
         paddingTop: 100,
-        marginBottom: 150,
+        marginBottom: 180,
         marginLeft: 20,
     },
 
