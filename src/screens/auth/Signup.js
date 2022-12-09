@@ -1,10 +1,10 @@
 import { View, Text, ImageBackground, TouchableOpacity, Image} from 'react-native'
 import React, { useState } from 'react'
 
-import bg from "../assets/images/bgSignup.png";
-import google from "../assets/images/google.png";
-import styles from "../styles/Signup";
-import Input from "../components/Input";
+import bg from "../../assets/images/bgSignup.png";
+import google from "../../assets/images/google.png";
+import styles from "../../styles/Signup";
+import Input from "../../components/Input";
 
 const Signup = () => {
 const [email, setEmail]=useState('')

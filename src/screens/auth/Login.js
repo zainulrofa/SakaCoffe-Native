@@ -1,9 +1,9 @@
 import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 
-import styles from "../styles/Login";
-import Input from "../components/Input";
-import google from "../assets/images/google.png";
+import styles from "../../styles/Login";
+import Input from "../../components/Input";
+import google from "../../assets/images/google.png";
 
 
 const Login = () => {

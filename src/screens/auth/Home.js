@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import bg from '../assets/images/bgHome.png';
-import styles from "../styles/Home";
+import bg from '../../assets/images/bgHome.png';
+import styles from "../../styles/Home";
 import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
