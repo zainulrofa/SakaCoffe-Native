@@ -72,6 +72,17 @@ const style = StyleSheet.create({
         fontSize: 17,
         paddingLeft: 12
     },
+
+    btnLoading: {
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        // padding: 20,
+        // borderRadius: 10,
+        justifyContent: 'center',
+        // marginHorizontal: 31,
+        // marginTop: 25,
+        // fontSize: 17,
+      },
 })
 
 export default style
