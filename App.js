@@ -6,6 +6,8 @@ import Welcome from "./src/screens/auth/WelcomePage";
 import Home from "./src/screens/auth/Home";
 import Signup from './src/screens/auth/Signup';
 import Login from "./src/screens/auth/Login";
+import Forgot from "./src/screens/auth/Forgot";
+import Reset from "./src/screens/auth/Reset";
 
 function App() {
   const Stack = createStackNavigator()
@@ -17,6 +19,8 @@ function App() {
         <Stack.Screen name='Welcome' component={Welcome} options={{headerShown: false,}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown: false,}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown: false,}}/>
+        <Stack.Screen name='Forgot' component={Forgot} options={{headerShown: false,}}/>
+        <Stack.Screen name='Reset' component={Reset} options={{headerShown: false,}}/>
       </Stack.Navigator>
    </NavigationContainer>
   )
