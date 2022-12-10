@@ -8,6 +8,7 @@ import Signup from './src/screens/auth/Signup';
 import Login from "./src/screens/auth/Login";
 import Forgot from "./src/screens/auth/Forgot";
 import Reset from "./src/screens/auth/Reset";
+import HomePage from "./src/screens/homePage/Index";
 
 function App() {
   const Stack = createStackNavigator()
@@ -21,6 +22,7 @@ function App() {
         <Stack.Screen name='Login' component={Login} options={{headerShown: false,}}/>
         <Stack.Screen name='Forgot' component={Forgot} options={{headerShown: false,}}/>
         <Stack.Screen name='Reset' component={Reset} options={{headerShown: false,}}/>
+        <Stack.Screen name='HomePage' component={HomePage} options={{headerShown: false,}}/>
       </Stack.Navigator>
    </NavigationContainer>
   )

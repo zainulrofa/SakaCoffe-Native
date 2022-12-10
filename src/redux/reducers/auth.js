@@ -27,7 +27,7 @@ const authReducer = (prevState = initialState, { type, payload }) => {
             ...prevState,
             isError: true,
             isLoading: false,
-            error: payload.error.response.data.msg,
+            error: payload.error,
           };
         case register + fulfilled:
           return {
@@ -48,7 +48,7 @@ const authReducer = (prevState = initialState, { type, payload }) => {
             isError: true,
             isLoading: false,
             isFulfilled: false,
-            error: payload.error.response.data.msg,
+            error: payload.error,
           };
         case login + fulfilled:
           return {
@@ -75,7 +75,7 @@ const authReducer = (prevState = initialState, { type, payload }) => {
             isError: true,
             isLoading: false,
             isFulfilled: false,
-            error: payload.error.response.data.msg,
+            error: payload.error,
           };
         case forgot + fulfilled:
           return {
@@ -98,7 +98,7 @@ const authReducer = (prevState = initialState, { type, payload }) => {
             isError: true,
             isLoading: false,
             isFulfilled: false,
-            error: payload.error.response.data.msg,
+            error: payload.error,
           };
         case reset + fulfilled:
           return {

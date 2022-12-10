@@ -3,7 +3,7 @@ import axios from 'axios';
 const BaseUrl = process.env.BACKEND_URL
 
 export const register = body => {
-  const URL = `${BaseUrl}/api/auths/register`;
+  const URL = `${BaseUrl}api/auths/register`;
   // console.log('util', URL);
   return axios.post(URL, body);
 }

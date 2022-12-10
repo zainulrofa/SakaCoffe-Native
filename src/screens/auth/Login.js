@@ -32,7 +32,7 @@ const Login = () => {
                 ToastAndroid.SHORT,
                 ToastAndroid.TOP,
             )
-            navigation.navigate('Home')
+            navigation.navigate('HomePage')
         }
         const loginError = (error) => {
             ToastAndroid.showWithGravity(
@@ -53,9 +53,9 @@ const Login = () => {
                     <Text style={styles.title}>Login</Text>
                     <Input value={form.email} handler={onChangeHandler} placeholder='Enter your email address' isPassword={false} text={'email'} />
                     <Input value={form.password} handler={onChangeHandler} placeholder='Enter your password' isPassword={true} text={'password'} />
-                    <Text style={styles.forgot} onPress={()=>{navigation.navigate('Forgot')}}>Forgot Password?</Text>
+                    <Text style={styles.forgot} onPress={() => { navigation.navigate('Forgot') }}>Forgot Password?</Text>
                     <TouchableOpacity style={styles.createBtn} onPress={handleSubmit}>
-                        {auth.isLoading ? <View style={styles.btnLoading}>
+                        {auth.isLoading && !auth.userData ? <View style={styles.btnLoading}>
                             <ActivityIndicator size='large' color='black' />
                         </View> : <Text style={styles.textCreate}>Login</Text>}
                     </TouchableOpacity>
