@@ -25,3 +25,9 @@ export const reset = body => {
   // console.log('util', body);
   return axios.patch(URL, body);
 };
+
+export const logout = body => {
+  const URL = `${BaseUrl}api/auths/logout`;
+  // console.log('util', body);
+  return axios.patch(URL, body);
+};
