@@ -9,13 +9,16 @@ import Login from "./src/screens/auth/Login";
 import Forgot from "./src/screens/auth/Forgot";
 import Reset from "./src/screens/auth/Reset";
 import HomePage from "./src/screens/homePage/Index";
+import { useSelector } from 'react-redux';
 
 function App() {
   const Stack = createStackNavigator()
 
+  const token = useSelector(state=>state.auth.userData.token)||""
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Welcome'>
+      <Stack.Navigator initialRouteName={token?'HomePage':'Welcome'}>
         <Stack.Screen name='Home' component={Home} options={{headerShown: false,}} />
         <Stack.Screen name='Welcome' component={Welcome} options={{headerShown: false,}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown: false,}}/>
