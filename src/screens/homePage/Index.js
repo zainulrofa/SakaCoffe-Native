@@ -1,71 +1,126 @@
-import * as React from 'react';
-import { View, Text, Button } from 'react-native';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+import React,{useState} from 'react';
+
+import styles from '../../styles/HomePage';
+import Navbar from "../../components/Navbar"
+import Sample from "../../assets/images/product.png"
+
 import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+  Image,
+  Text,
+  View,
+  Pressable ,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  useWindowDimensions,
+  LinearLayout
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux';
 
-function Feed({ navigation }) {
+const Home = () => {
+  const navigation = useNavigation()
+  const {height} = useWindowDimensions();
+  const dispatch = useDispatch();
+  // const profile = useSelector(state => state.profile.profile);
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Feed Screen</Text>
-      <Button
-        title="Open drawer"
-        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-      />
-      <Button
-        title="Toggle drawer"
-        onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
+    <View style={styles.sectionContainer}>
+        <Navbar>
+            <ScrollView style={styles.container}>
+                <Text style={styles.title}>A good coffee is a good day</Text>
+                <Text style={styles.category} onPress={()=>{navigation.navigate("ProductDetail")}}>Favorite Products</Text>
+                <Text style={styles.see} onPress={()=>{navigation.navigate("ScreenFavorite")}}>See more</Text>
+                <ScrollView
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
+                    keyboardShouldPersistTaps={'always'}
+                    style={{height: height / 2,}}
+                >
+                    <Pressable style={styles.card} onPress={()=>{navigation.navigate("ProductDetail")}}>
+                        <View style={styles.containerImage}>
+                            <Image source={Sample} style={styles.imageCard}/>
+                        </View>
+                        <View style={styles.containerTitle}>
+                            <Text style={styles.cardTitle}>Hazelnut Latte</Text>
+                            <Text style={styles.cardPrice}>IDR 25.000</Text>    
+                        </View>
+                    </Pressable>
+                    <Pressable style={styles.card} onPress={()=>{navigation.navigate("ProductDetail")}}>
+                        <View style={styles.containerImage}>
+                            <Image source={Sample} style={styles.imageCard}/>
+                        </View>
+                        <View style={styles.containerTitle}>
+                            <Text style={styles.cardTitle}>Hazelnut Latte</Text>
+                            <Text style={styles.cardPrice}>IDR 25.000</Text>    
+                        </View>
+                    </Pressable>
+                    <Pressable style={styles.card} onPress={()=>{navigation.navigate("ProductDetail")}}>
+                        <View style={styles.containerImage}>
+                            <Image source={Sample} style={styles.imageCard}/>
+                        </View>
+                        <View style={styles.containerTitle}>
+                            <Text style={styles.cardTitle}>Hazelnut Latte</Text>
+                            <Text style={styles.cardPrice}>IDR 25.000</Text>    
+                        </View>
+                    </Pressable>
+                </ScrollView>
+                <Text style={styles.category}>Promo for you</Text>
+                <Text style={styles.see} onPress={()=>{navigation.navigate("ScreenPromo")}}>See more</Text>
+                <ScrollView
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
+                    style={{height: height / 2,}}
+                >
+                    <Pressable style={styles.card}>
+                        <View style={styles.containerImage}>
+                            <Image source={Sample} style={styles.imageCard}/>
+                        </View>
+                        <View style={styles.containerTitle}>
+                            <Text style={styles.cardTitle}>Hazelnut Latte</Text>
+                            <Text style={styles.cardPrice}>IDR 25.000</Text>    
+                        </View>
+                    </Pressable>
+                    <Pressable style={styles.card}>
+                        <View style={styles.containerImage}>
+                            <Image source={Sample} style={styles.imageCard}/>
+                        </View>
+                        <View style={styles.containerTitle}>
+                            <Text style={styles.cardTitle}>Hazelnut Latte</Text>
+                            <Text style={styles.cardPrice}>IDR 25.000</Text>    
+                        </View>
+                    </Pressable>
+                    <Pressable style={styles.card}>
+                        <View style={styles.containerImage}>
+                            <Image source={Sample} style={styles.imageCard}/>
+                        </View>
+                        <View style={styles.containerTitle}>
+                            <Text style={styles.cardTitle}>Hazelnut Latte</Text>
+                            <Text style={styles.cardPrice}>IDR 25.000</Text>    
+                        </View>
+                    </Pressable>
+                    <Pressable style={styles.card}>
+                        <View style={styles.containerImage}>
+                            <Image source={Sample} style={styles.imageCard}/>
+                        </View>
+                        <View style={styles.containerTitle}>
+                            <Text style={styles.cardTitle}>Hazelnut Latte</Text>
+                            <Text style={styles.cardPrice}>IDR 25.000</Text>    
+                        </View>
+                    </Pressable>
+                    <Pressable style={styles.card}>
+                        <View style={styles.containerImage}>
+                            <Image source={Sample} style={styles.imageCard}/>
+                        </View>
+                        <View style={styles.containerTitle}>
+                            <Text style={styles.cardTitle}>Hazelnut Latte</Text>
+                            <Text style={styles.cardPrice}>IDR 25.000</Text>    
+                        </View>
+                    </Pressable>
+                </ScrollView>
+            </ScrollView>
+        </Navbar>
     </View>
   );
-}
+};
 
-function Notifications() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notifications Screen</Text>
-    </View>
-  );
-}
-
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator
-      useLegacyImplementation
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-    >
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Notifications" component={Notifications} />
-    </Drawer.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer independent={true}>
-      <MyDrawer />
-    </NavigationContainer>
-  );
-}
+export default Home;
