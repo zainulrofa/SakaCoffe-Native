@@ -42,10 +42,10 @@ function Navbar({ children }) {
     const { height, width } = useWindowDimensions();
     const dispatch = useDispatch();
     const user = useSelector(state => state.profile.profile);
-    console.log(user.image)
     //   const email = useSelector(state => state.auth.userData.email);
     const auth = useSelector(state => state.auth);
-
+    console.log(auth.userData.token)
+    
     const logoutHandler = () => {
         const LogoutSuccess = () => {
             ToastAndroid.showWithGravity(
@@ -170,7 +170,7 @@ function Navbar({ children }) {
                     <View style={styles.left}>
                         {/* <Image source={Chat} style={styles.icon}/> */}
                         {/* <Image source={Search} style={styles.icon}/> */}
-                        <Icons name={"rocketchat"} style={{ transform: [{ rotateY: '180deg' }], fontSize: 25, marginHorizontal: 7 }} />
+                        <Icons name={"comment"} style={{ transform: [{ rotateY: '180deg' }], fontSize: 25, marginHorizontal: 7 }} />
                         <IconIon name={"search-outline"} style={styles.Icons} />
                         <IconIon name={"cart-outline"} style={styles.Icons} />
                         {/* <Image source={Chart} style={styles.icon}/> */}

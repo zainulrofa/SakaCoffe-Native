@@ -7,6 +7,7 @@ const ACTION_STRING = {
   reset: 'AUTH_RESET',
   logout: 'AUTH_LOGOUT',
   getUser: 'GET_USER',
+  getProduct: 'GET_PRODUCT',
   pending: `_${ActionType.Pending}`,
   fulfilled: `_${ActionType.Fulfilled}`,
   rejected: `_${ActionType.Rejected}`,

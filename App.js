@@ -14,11 +14,11 @@ import { useSelector } from 'react-redux';
 function App() {
   const Stack = createStackNavigator()
 
-  const token = useSelector(state=>state.auth.userData.token)||""
+  const token = useSelector(state=>state.auth.userData.token)
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={token?'HomePage':'Welcome'}>
+      <Stack.Navigator initialRouteName={!token ? 'HomePage' : 'Welcome'}>
         <Stack.Screen name='Home' component={Home} options={{headerShown: false,}} />
         <Stack.Screen name='Welcome' component={Welcome} options={{headerShown: false,}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown: false,}}/>
