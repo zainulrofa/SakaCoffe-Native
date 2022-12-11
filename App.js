@@ -9,6 +9,7 @@ import Login from "./src/screens/auth/Login";
 import Forgot from "./src/screens/auth/Forgot";
 import Reset from "./src/screens/auth/Reset";
 import HomePage from "./src/screens/homePage/Index";
+import Drawer from "./src/screens/drawer/Index";
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={!token ? 'HomePage' : 'Welcome'}>
+      <Stack.Navigator initialRouteName={'Drawer'}>
         <Stack.Screen name='Home' component={Home} options={{headerShown: false,}} />
         <Stack.Screen name='Welcome' component={Welcome} options={{headerShown: false,}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown: false,}}/>
@@ -26,6 +27,7 @@ function App() {
         <Stack.Screen name='Forgot' component={Forgot} options={{headerShown: false,}}/>
         <Stack.Screen name='Reset' component={Reset} options={{headerShown: false,}}/>
         <Stack.Screen name='HomePage' component={HomePage} options={{headerShown: false,}}/>
+        <Stack.Screen name='Drawer' component={Drawer} options={{headerShown: false,}}/>
       </Stack.Navigator>
    </NavigationContainer>
   )

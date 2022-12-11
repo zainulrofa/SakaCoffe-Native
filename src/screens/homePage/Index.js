@@ -36,7 +36,7 @@ const Home = () => {
         <View style={styles.sectionContainer}>
             <Navbar>
                 <ScrollView style={styles.container}>
-                    <Text style={styles.title}>A good coffee is a good day</Text>
+                    {/* <Text style={styles.title}>A good coffee is a good day</Text> */}
                     <Text style={styles.category} onPress={() => { navigation.navigate("ProductDetail") }}>Favorite Products</Text>
                     <Text style={styles.see} onPress={() => { navigation.navigate("ScreenFavorite") }}>See more</Text>
 
