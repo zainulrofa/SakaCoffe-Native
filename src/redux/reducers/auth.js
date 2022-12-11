@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const authReducer = (prevState = initialState, { type, payload }) => {
-    const { register, login, forgot, reset, pending, rejected, fulfilled } = ACTION_STRING;
+    const { register, login, forgot, reset, logout, pending, rejected, fulfilled } = ACTION_STRING;
     switch (type) {
         case register + pending:
           return {
@@ -106,7 +106,25 @@ const authReducer = (prevState = initialState, { type, payload }) => {
             isError: false,
             isLoading: false,
             isFulfilled: true,
+        };
+      
+        case logout + pending:
+          return {
+            ...prevState,
+            isLoading: true,
+            isError: false,
+            isFulfilled: false,
           };
+        case logout + rejected:
+          return {
+            ...prevState,
+            isError: true,
+            isLoading: false,
+            isFulfilled: false,
+            error: payload.error,
+          };
+        case logout + fulfilled:
+          return initialState
     
         default:
           return prevState;

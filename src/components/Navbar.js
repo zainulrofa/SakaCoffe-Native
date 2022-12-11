@@ -25,14 +25,16 @@ import {
     TouchableOpacity,
     Modal,
     Pressable,
-    ActivityIndicator
+    ActivityIndicator,
+    ToastAndroid
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { DrawerItem } from '@react-navigation/drawer';
+// import { DrawerItem } from '@react-navigation/drawer';
 import userAction from '../redux/actions/user';
-// import authAction from '../../redux/actions/auth';
+import authAction from '../redux/actions/auth';
+
 
 function Navbar({ children }) {
     const [modalVisible, setModalVisible] = useState(false);
@@ -45,19 +47,24 @@ function Navbar({ children }) {
     const auth = useSelector(state => state.auth);
 
     const logoutHandler = () => {
-        // const LogoutSuccess = () => {
-        //   navigation.navigate('Welcome')
-        // }
-        // const LogoutError = (error) => {
-        //     ToastAndroid.showWithGravityAndOffset(
-        //         `${error}`,
-        //         ToastAndroid.SHORT,
-        //         ToastAndroid.TOP,
-        //         25,
-        //         50
-        //     );
-        // }
-        // dispatch(authAction.logoutThunk(auth.userData.token, LogoutSuccess, LogoutError))
+        const LogoutSuccess = () => {
+            ToastAndroid.showWithGravity(
+                'Logout successfully',
+                ToastAndroid.SHORT,
+                ToastAndroid.TOP
+            )
+          navigation.navigate('Welcome')
+        }
+        const LogoutError = (error) => {
+            ToastAndroid.showWithGravityAndOffset(
+                `${error}`,
+                ToastAndroid.SHORT,
+                ToastAndroid.TOP,
+                25,
+                50
+            );
+        }
+        dispatch(authAction.logoutThunk(auth.userData.token, LogoutSuccess, LogoutError))
     }
 
     useEffect(() => {

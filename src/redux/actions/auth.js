@@ -1,5 +1,5 @@
 import ACTION_STRING from './actionString';
-import { register, login, forgot, reset } from "../../utils/auth";
+import { register, login, forgot, reset, logout } from "../../utils/auth";
 
 const registerPending = () => ({
   type: ACTION_STRING.register.concat(ACTION_STRING.pending),
@@ -54,6 +54,20 @@ const resetRejected = error => ({
 
 const resetFulfilled = data => ({
   type: ACTION_STRING.reset.concat(ACTION_STRING.fulfilled),
+  payload: { data },
+});
+
+const logoutPending = () => ({
+  type: ACTION_STRING.logout.concat(ACTION_STRING.pending),
+});
+
+const logoutRejected = error => ({
+  type: ACTION_STRING.logout.concat(ACTION_STRING.rejected),
+  payload: { error },
+});
+
+const logoutFulfilled = data => ({
+  type: ACTION_STRING.logout.concat(ACTION_STRING.fulfilled),
   payload: { data },
 });
 
@@ -122,11 +136,28 @@ const resetThunk = (body, cbSuccess, cbDenied) => {
   };
 };
 
+const logoutThunk = (token, cbSuccess, cbDenied) => {
+  return async dispatch => {
+    try {
+      dispatch(logoutPending());
+      console.log('redux', token);
+      const result = await logout(token);
+      dispatch(logoutFulfilled(result.data));
+      typeof cbSuccess === "function" && cbSuccess();
+    } catch (error) {
+      dispatch(logoutRejected(error));
+      console.log(error);
+      typeof cbDenied === "function" && cbDenied(error.response.data.msg);
+    }
+  };
+};
+
 const authAction = {
   registerThunk,
   loginThunk,
   forgotThunk,
-  resetThunk
+  resetThunk,
+  logoutThunk
 };
 
 export default authAction;

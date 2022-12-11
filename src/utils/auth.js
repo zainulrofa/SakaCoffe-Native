@@ -2,6 +2,14 @@ import axios from 'axios';
 
 const BaseUrl = process.env.BACKEND_URL
 
+const config = (token) => {
+  return {
+    headers: {
+      "x-access-token": `${token}`,
+    },
+  };
+};
+
 export const register = body => {
   const URL = `${BaseUrl}api/auths/register`;
   // console.log('util', URL);
@@ -26,8 +34,8 @@ export const reset = body => {
   return axios.patch(URL, body);
 };
 
-export const logout = body => {
+export const logout = (token) => {
   const URL = `${BaseUrl}api/auths/logout`;
   // console.log('util', body);
-  return axios.patch(URL, body);
+  return axios.delete(URL, config(token));
 };
