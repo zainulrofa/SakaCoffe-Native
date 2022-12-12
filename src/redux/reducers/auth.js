@@ -48,6 +48,10 @@ const authReducer = (prevState = initialState, { type, payload }) => {
             isError: true,
             isLoading: false,
             isFulfilled: false,
+            userData: {
+              id: null,
+              token: null,
+            },
             error: payload.error,
           };
         case login + fulfilled:
