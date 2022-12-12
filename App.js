@@ -11,6 +11,7 @@ import Reset from "./src/screens/auth/Reset";
 import HomePage from "./src/screens/homePage/Index";
 import Drawer from "./src/screens/drawer/Index";
 import ProductDetail from "./src/screens/products/ProductsDetail";
+import Profile from "./src/screens/profile/Index";
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Stack.Screen name='HomePage' component={HomePage} options={{headerShown: false,}}/>
         <Stack.Screen name='Drawer' component={Drawer} options={{headerShown: false,}}/>
         <Stack.Screen name='ProductDetail' component={ProductDetail} options={{headerShown: false,}}/>
+        <Stack.Screen name='Profile' component={Profile} options={{headerShown: false,}}/>
       </Stack.Navigator>
    </NavigationContainer>
   )

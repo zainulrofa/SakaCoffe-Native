@@ -45,6 +45,10 @@ function Navbar({ children }) {
     //   const email = useSelector(state => state.auth.userData.email);
     const auth = useSelector(state => state.auth);
     console.log(auth.userData.token)
+
+    const toProfile = () => {
+        navigation.navigate('Profile');
+      };
     
     const logoutHandler = () => {
         const LogoutSuccess = () => {
@@ -85,11 +89,11 @@ function Navbar({ children }) {
                             <Icons name={"user-circle"} size={20} style={styles.imageBottom} label="Close drawer"
                             onPress={() => props.navigation.closeDrawer()}/>
                         </DrawerItem> */}
-                        <View style={styles.containerBottom}>
+                        <Pressable style={styles.containerBottom} onPress={toProfile}>
                             {/* <Image source={IconUser} style={styles.imageBottom}/> */}
                             <Icons name={"user-circle"} size={20} style={styles.imageBottom} />
                             <Text style={styles.textBottom}>Edit Profile</Text>
-                        </View>
+                        </Pressable>
                         <Divider style={{ width: "90%", margin: 3 }} />
                         <View style={styles.containerBottom}>
                             {/* <Image source={IconUser} style={styles.imageBottom}/> */}
