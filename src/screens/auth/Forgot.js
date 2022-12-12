@@ -61,7 +61,7 @@ const Forgot = () => {
             <View style={styles.content}>
                 <Text style={styles.title}>Don't Worry!</Text>
                 <Text style={styles.titleDesc}>
-                    Enter your email adress to get reset password link
+                    Enter your email address to get reset password link
                 </Text>
                 <ScrollView style={styles.form}>
                     <KeyboardAvoidingView>

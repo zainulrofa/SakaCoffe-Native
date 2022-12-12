@@ -77,9 +77,9 @@ const Reset = () => {
         <View style={styles.container}>
             <ImageBackground source={bg} resizeMode="cover" style={styles.bg} />
             <View style={styles.content}>
-                <Text style={styles.title}>Don't Worry!</Text>
+                <Text style={styles.title}>ONE STEP AGAIN!</Text>
                 <Text style={styles.titleDesc}>
-                    Enter your email adress to get reset password link
+                    Enter your OTP to reset your password 
                 </Text>
                 <ScrollView style={styles.form}>
                     <KeyboardAvoidingView>
