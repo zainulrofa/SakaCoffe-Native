@@ -55,7 +55,7 @@ function History() {
     return (
         <ScrollView style={styles.container}>
             <View style={{ padding: 30 }}>
-                <IconComunity name={"chevron-left"} size={20} style={styles.icons} onPress={() => { navigation.goBack() }} />
+                <IconComunity name={"chevron-left"} size={20} style={styles.icons} onPress={() => { navigation.goBack() }} onLongPress={()=>{navigation.navigate('HomePage')} } />
                 <Text style={styles.title}>Order History</Text>
                 <View style={styles.swipe}>
                     <IconComunity name={"gesture-swipe"} size={20} />
@@ -67,7 +67,7 @@ function History() {
                 rightButtons={leftButton}
             >
                 {history?.map((e) => {
-                    return (<View style={{ display: 'flex', paddingLeft: 25, paddingRight: 25 }}>
+                    return (<View style={{ display: 'flex', paddingLeft: 25, paddingRight: 25 }} key={e.id}>
                         <View style={{ backgroundColor: 'white', width: width / 1.15, display: 'flex', borderRadius: 20, flexDirection: 'row', padding: 15 }}>
                             <View>
                                 <Image source={{uri:e.image}} style={styles.imageCard} />

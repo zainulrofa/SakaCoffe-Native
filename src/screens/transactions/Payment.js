@@ -26,11 +26,12 @@ import transactionActions from '../../redux/actions/transaction';
 function Payment() {
 
     const [Payment, setPayment] = useState()
-    const [isLoading, setLoading] = useState(false)
+    // const [isLoading, setLoading] = useState(false)
 
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const cartState = useSelector(state => state.transaction.dataPayment);
+    const isLoading = useSelector(state => state.transaction.isLoading)
     const token = useSelector(state => state.auth.userData.token);
 
 console.log(Payment)
@@ -43,7 +44,7 @@ console.log(Payment)
     }
 
         const handlePress = () => {
-            if (isLoading) return
+            // if (isLoading) return
             if (!Payment) return ToastAndroid.showWithGravityAndOffset(
                     `Select Payment Method !`,
                     ToastAndroid.SHORT,
@@ -51,7 +52,7 @@ console.log(Payment)
                     25,
                     50
                 );
-            setLoading(true)
+            // setLoading(true)
             // console.log(sendBody)
 
             const sendBody = {
@@ -64,6 +65,7 @@ console.log(Payment)
                 payment_id: Payment
             }
             dispatch(transactionActions.createTransactionThunk(sendBody, token))
+            navigation.navigate('History')
         }
 
     const costing = (price) => {
@@ -161,7 +163,7 @@ console.log(Payment)
                             flexDirection: 'row',
                             alignContent: 'center'
                         }}>
-                        {isLoading?<ActivityIndicator size='large' color='white' /> : <Text style={{color: "white", fontFamily: 'Poppins-Bold', fontSize: 16, paddingLeft: 35}}>Proceed payment</Text>}
+                        {isLoading?<ActivityIndicator size='large' color='white' /> : <Text style={{color: "white", fontFamily: 'Poppins-Bold', fontWeight: 'bold', fontSize: 20, paddingLeft: 80}}>Proceed payment</Text>}
                     </View>
                 </TouchableOpacity>
             </View>
