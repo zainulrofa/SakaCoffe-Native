@@ -169,12 +169,12 @@ function Navbar({ children }) {
                 <View style={styles.sectionContainer}>
                     <View onPress={() => DrawerLayout.current.openDrawer()}>
                         {/* <Image source={Icon} /> */}
-                        <IconComunity name={"chevron-double-right"} style={{ fontSize: 40 }} />
+                        <IconComunity name={"gesture-swipe-right"} style={{ fontSize: 40, color: 'black' }} />
                     </View>
                     <View style={styles.left}>
                         {/* <Image source={Chat} style={styles.icon}/> */}
                         {/* <Image source={Search} style={styles.icon}/> */}
-                        <Icons name={"comment"} style={{ transform: [{ rotateY: '180deg' }], fontSize: 25, marginHorizontal: 7 }} />
+                        <Icons name={"comment"} style={{ transform: [{ rotateY: '180deg' }], fontSize: 25, marginHorizontal: 7, color: 'grey' }} />
                         <IconIon name={"search-outline"} style={styles.Icons} />
                         <IconIon name={"cart-outline"} style={styles.Icons} />
                         {/* <Image source={Chart} style={styles.icon}/> */}

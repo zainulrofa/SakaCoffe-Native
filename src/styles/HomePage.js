@@ -9,9 +9,40 @@ const styles = StyleSheet.create({
     // fontFamily: "Poppins-Bold",
     fontWeight: 'bold',
     fontSize: 34,
-    color: 'black'
+    color: 'black',
+    width: 300,
+    marginVertical: 20
+  },
+   wrapperSearch: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 30,
+    // marginLeft: 40,
+     marginRight: 25,
+    borderRadius: 30,
+    backgroundColor: '#EFEEEE',
+    elevation: 1,
+    shadowColor: '#393939',
+  },
+  Icons: {
+    fontSize: 30,
+    marginHorizontal: 3,
+    color: 'grey',
+  },
+  iconSearch: {
+    color: '#000',
+    fontSize: 20,
+    marginRight: 10,
+  },
+  textPlaceholder: {
+    fontFamily: 'Poppins-SemiBold',
+    fontWeight: 'bold',
+    fontSize: 17,
+    flex: 1,
+    color: '#6A4029'
   },
   container:{
+    marginTop: 10,
     paddingLeft: 20,
   },
   category:{
@@ -19,7 +50,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: "#6A4029",
     fontSize: 17,
-    paddingTop: 5
+    paddingTop: 2
   },
   card: {
     marginTop: 50,

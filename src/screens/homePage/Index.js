@@ -4,6 +4,9 @@ import styles from '../../styles/HomePage';
 import Navbar from "../../components/Navbar"
 import Card from "../../components/CardProduct";
 import Sample from "../../assets/images/product.png"
+import FontAwesome, { SolidIcons } from 'react-native-fontawesome';
+import IconIon from 'react-native-vector-icons/Ionicons'
+
 
 import {
     Image,
@@ -25,8 +28,11 @@ const Home = () => {
     const navigation = useNavigation()
     const { height } = useWindowDimensions();
     const dispatch = useDispatch();
+    const [open, setOpen] = useState(false)
     const products = useSelector(state => state.product.product)
     const isPending = useSelector(state => state.product.isLoading)
+
+    
     // const profile = useSelector(state => state.profile.profile);
     // console.log(products)
     useEffect(() => {
@@ -36,9 +42,19 @@ const Home = () => {
         <View style={styles.sectionContainer}>
             <Navbar>
                 <ScrollView style={styles.container}>
-                    {/* <Text style={styles.title}>A good coffee is a good day</Text> */}
+                    <Text style={styles.title}>A good coffee is a good day</Text>
+                    <View style={styles.wrapperSearch}>
+                        {/* <FontAwesome icon={SolidIcons.search} style={styles.iconSearch} /> */}
+                        <IconIon name={"search-outline"} style={styles.Icons} />
+                        <TextInput
+                            style={styles.textPlaceholder}
+                            placeholder="Search"
+                            placeholderTextColor="grey"
+                        // onChangeText={handlersearch}
+                        />
+                    </View>
                     <Text style={styles.category} onPress={() => { navigation.navigate("ProductDetail") }}>Favorite Products</Text>
-                    <Text style={styles.see} onPress={() => { navigation.navigate("ScreenFavorite") }}>See more</Text>
+                    <Text style={styles.see} onPress={() => { navigation.navigate("AllProduct") }}>See more</Text>
 
                     {isPending ? <View style={styles.btnLoading}>
                         <ActivityIndicator size='large' color='black' />
@@ -57,10 +73,7 @@ const Home = () => {
                                 key={e.id}
                             />
                         })}
-                        {/* <Card /> */}
                     </ScrollView>}
-
-
                     <Text style={styles.category}>Promo for you</Text>
                     <Text style={styles.see} onPress={() => { navigation.navigate("ScreenPromo") }}>See more</Text>
                     <ScrollView

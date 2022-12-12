@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
   },
   Icons: {
     fontSize: 30,
-    marginHorizontal: 3
+    marginHorizontal: 3,
+    color: 'grey',
   },
   centeredView: {
     flex: 1,
