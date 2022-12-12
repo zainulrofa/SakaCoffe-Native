@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
         paddingTop: 30
     },
     swipe: {
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

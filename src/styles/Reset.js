@@ -74,7 +74,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         justifyContent: 'center',
-      },
+  },
+    
+  wrapperPwd: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    borderBottomWidth: 2,
+    borderBottomColor: '#fff',
+    marginBottom: 10,
+  },
+  iconPwd: {
+      color: '#fff',
+      fontSize: 20,
+  },
+  inputPwd: {
+    fontFamily: 'Poppins-Bold',
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#fff',
+    flex: 1,
+    paddingBottom: 10,
+  },
 });
 
 export default styles;

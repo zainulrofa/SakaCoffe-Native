@@ -9,9 +9,12 @@ import {
     ScrollView,
     ToastAndroid,
     ActivityIndicator,
+    TextInput
 } from 'react-native';
 // import {useDispatch, useSelector} from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import IconIon from 'react-native-vector-icons/Ionicons'
+
 
 
 import styles from '../../styles/Reset';
@@ -24,6 +27,8 @@ const Reset = () => {
     const dispatch = useDispatch()
     const navigation = useNavigation();
     const loading = useSelector(state => state.auth.isLoading)
+    const [isPwdShown, setIsPwdShown] = useState(true);
+    const [isPwdShown2, setIsPwdShown2] = useState(true);
     const [form, setForm] = useState({
         otp: '',
         newPassword: '',
@@ -31,6 +36,14 @@ const Reset = () => {
     });
 
     console.log(form);
+
+    const tooglePassword = () => {
+        setIsPwdShown(!isPwdShown);
+    };
+
+    const tooglePassword2 = () => {
+        setIsPwdShown2(!isPwdShown2);
+    };
 
     const onChangeHandler = (text, type) => {
         setForm(form => ({ ...form, [type]: text }))
@@ -71,8 +84,38 @@ const Reset = () => {
                 <ScrollView style={styles.form}>
                     <KeyboardAvoidingView>
                         <Input value={form.otp} placeholder='Enter your OTP' isPassword={false} type='phone-pad' handler={onChangeHandler} text={'otp'} />
-                        <Input value={form.newPassword} placeholder='Enter your new password' isPassword={true} type='none' handler={onChangeHandler} text={'newPassword'} />
-                        <Input value={form.confirmPassword} placeholder='Confirm your new password' isPassword={true} type='none' handler={onChangeHandler} text={'confirmPassword'} />
+                        {/* <Input value={form.newPassword} placeholder='Enter your new password' isPassword={true} type='none' handler={onChangeHandler} text={'newPassword'} /> */}
+                        {/* <Input value={form.confirmPassword} placeholder='Confirm your new password' isPassword={true} type='none' handler={onChangeHandler} text={'confirmPassword'} /> */}
+                        <View style={styles.wrapperPwd}>
+                            <TextInput
+                                secureTextEntry={isPwdShown}
+                                style={styles.inputPwd}
+                                value={form.newPassword}
+                                placeholder="Enter your password"
+                                placeholderTextColor="white"
+                                onChangeText={text => onChangeHandler(text, 'newPassword')}
+                            />
+                            <IconIon
+                                name={isPwdShown ? 'eye' : 'eye-off'}
+                                style={styles.iconPwd}
+                                onPress={tooglePassword}
+                            />
+                        </View>
+                        <View style={styles.wrapperPwd}>
+                            <TextInput
+                                secureTextEntry={isPwdShown2}
+                                style={styles.inputPwd}
+                                value={form.confirmPassword}
+                                placeholder="Enter your password"
+                                placeholderTextColor="white"
+                                onChangeText={text => onChangeHandler(text, 'confirmPassword')}
+                            />
+                            <IconIon
+                                name={isPwdShown2 ? 'eye' : 'eye-off'}
+                                style={styles.iconPwd}
+                                onPress={tooglePassword2}
+                            />
+                        </View>
                         <Text style={styles.textConfirmation}>
                             Haven&#39;t received any link?
                         </Text>

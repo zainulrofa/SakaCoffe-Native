@@ -12,6 +12,11 @@ import HomePage from "./src/screens/homePage/Index";
 import Drawer from "./src/screens/drawer/Index";
 import ProductDetail from "./src/screens/products/ProductsDetail";
 import Profile from "./src/screens/profile/Index";
+import AllProduct from "./src/screens/products/AllProduct";
+import Cart from "./src/screens/transactions/Cart";
+import Checkout from "./src/screens/transactions/Checkout";
+import Payment from "./src/screens/transactions/Payment";
+import History from "./src/screens/transactions/History";
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -32,6 +37,11 @@ function App() {
         <Stack.Screen name='Drawer' component={Drawer} options={{headerShown: false,}}/>
         <Stack.Screen name='ProductDetail' component={ProductDetail} options={{headerShown: false,}}/>
         <Stack.Screen name='Profile' component={Profile} options={{headerShown: false,}}/>
+        <Stack.Screen name='AllProduct' component={AllProduct} options={{headerShown: false,}}/>
+        <Stack.Screen name='Cart' component={Cart} options={{headerShown: false,}}/>
+        <Stack.Screen name='Checkout' component={Checkout} options={{headerShown: false,}}/>
+        <Stack.Screen name='Payment' component={Payment} options={{headerShown: false,}}/>
+        <Stack.Screen name='History' component={History} options={{headerShown: false,}}/>
       </Stack.Navigator>
    </NavigationContainer>
   )
