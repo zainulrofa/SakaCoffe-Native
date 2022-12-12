@@ -2,6 +2,7 @@ import ACTION_STRING from '../actions/actionString';
 
 const initialState = {
     product: [],
+    detail: [],
     isLoading: false,
     isError: false,
     isFulfilled: false,
@@ -9,7 +10,7 @@ const initialState = {
 };
 
 const productReducer = (prevState = initialState, { type, payload }) => {
-    const { getProduct, pending, rejected, fulfilled } = ACTION_STRING;
+    const { getProduct, getDetail, pending, rejected, fulfilled } = ACTION_STRING;
     switch (type) {
         case getProduct + pending:
             return {
@@ -34,6 +35,31 @@ const productReducer = (prevState = initialState, { type, payload }) => {
                 isError: false,
                 isFulfilled: true,
                 product: payload.data.data
+            };
+
+        case getDetail + pending:
+            return {
+                ...prevState,
+                isLoading: true,
+                isError: false,
+                isFulfilled: false,
+            };
+        case getDetail + rejected:
+            return {
+                ...prevState,
+                isError: true,
+                isLoading: false,
+                isFulfilled: false,
+                error: payload.error.response.data.msg,
+                detail: []
+            };
+        case getDetail + fulfilled:
+            return {
+                ...prevState,
+                isLoading: false,
+                isError: false,
+                isFulfilled: true,
+                detail: payload.data.data
             };
 
         default:

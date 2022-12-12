@@ -8,6 +8,7 @@ const ACTION_STRING = {
   logout: 'AUTH_LOGOUT',
   getUser: 'GET_USER',
   getProduct: 'GET_PRODUCT',
+  getDetail: 'GET_DETAIL',
   pending: `_${ActionType.Pending}`,
   fulfilled: `_${ActionType.Fulfilled}`,
   rejected: `_${ActionType.Rejected}`,
