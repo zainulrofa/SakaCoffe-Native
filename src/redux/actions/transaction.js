@@ -7,6 +7,8 @@ import ACTION_STRING from './actionString';
 const {
   createTransaction,
   transactionData,
+  checkout,
+  payment,
   getHistory,
   pending,
   rejected,
@@ -72,10 +74,27 @@ const dataTransaction = data => {
     payload: {data},
   };
 };
+
+const dataCheckout = data => {
+  return {
+    type: checkout,
+    payload: {data},
+  };
+};
+
+const dataPayment = data => {
+  return {
+    type: payment,
+    payload: {data},
+  };
+};
+
 const transactionActions = {
   createTransactionThunk,
   dataTransaction,
   getHistoryThunk,
+  dataCheckout,
+  dataPayment,
 };
 
 export default transactionActions;

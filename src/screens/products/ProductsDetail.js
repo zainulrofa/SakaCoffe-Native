@@ -51,6 +51,7 @@ function ProductDetail(props) {
             `Added Product To Cart`,
             ToastAndroid.SHORT,
             ToastAndroid.TOP,
+            navigation.navigate('Cart')
         )
     }
 

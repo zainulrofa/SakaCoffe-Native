@@ -12,6 +12,8 @@ const ACTION_STRING = {
   getDetail: 'GET_DETAIL',
   createTransaction: 'CREATE_TRANSACTION',
   transactionData: 'TRANSACTION_DATA',
+  checkout: 'TRANSACTION_CHECKOUT',
+  payment: 'TRANSACTION_PAYMENT',
   getHistory: 'GET_HISTORY',
   pending: `_${ActionType.Pending}`,
   fulfilled: `_${ActionType.Fulfilled}`,
