@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from '../../styles/History';
 import IconComunity from 'react-native-vector-icons/MaterialCommunityIcons';
+import Card from "../../components/CardHistory";
 import { SwipeItem, SwipeButtonsContainer } from 'react-native-swipe-item';
 import Sample from '../../assets/images/product.png';
 import ViewOverflow from 'react-native-view-overflow';
@@ -14,7 +15,9 @@ import {
     Pressable,
     TextInput,
     TouchableOpacity,
-    useWindowDimensions
+    useWindowDimensions,
+    FlatList,
+    ActivityIndicator,
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
@@ -22,67 +25,95 @@ import { useDispatch, useSelector } from 'react-redux';
 import transactionActions from '../../redux/actions/transaction';
 
 function History() {
-
-    const leftButton = (
-        <SwipeButtonsContainer style={{ paddingTop: 30, paddingRight: 40 }}>
-            <TouchableOpacity
-                onPress={() => console.log('left button clicked')}
-                style={styles.trash}>
-                <IconComunity name={"trash-can-outline"} style={styles.iconTrash} size={30} />
-            </TouchableOpacity>
-        </SwipeButtonsContainer>
-    );
-
-    const navigation = useNavigation();
+    const navigation = useNavigation()
     const dispatch = useDispatch()
-    const { width } = useWindowDimensions();
     const history = useSelector(state => state.transaction.history)
     const token = useSelector(state => state.auth.userData.token)
+    const isLoading = useSelector(state => state.transaction.isLoading)
+    const pagination = useSelector(state => state.transaction.pagination)
+    const [query, setQuery]= useState ({page: 1, limit: 7})
 
-    const costing = (price) => {
+
+    const renderFooter = () => {
         return (
-            "IDR " +
-            parseFloat(price)
-                .toFixed()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
-        );
-    };
+            <View
+        style={{
+          flex: 1,
+          paddingVertical: 20,
+          justifyContent: 'center',
+          paddingBottom: 10,
+        }}>
+        {isLoading && <ActivityIndicator size="large" color="black" />}
+        {pagination.totalPage == query.page && (
+          <Text
+            style={{
+              textAlign: 'center',
+              color: 'black',
+              fontFamily: 'Poppins-Regular',
+            }}>
+            No more transcations history
+          </Text>
+        )}
+      </View>
+        )
+    }
+
+    const nextItems = () => {
+        if (query.page == pagination.totalPage)
+            return setQuery({...query, page: query.page+1})
+    }
 
     useEffect(() => {
-        dispatch(transactionActions.getHistoryThunk(token))
-    }, [dispatch])
+        dispatch(transactionActions.getHistoryThunk(token, query))
+    }, [query])
 
     return (
         <View style={styles.container}>
-            <View style={{ padding: 30 }}>
-                <IconComunity name={"chevron-left"} size={20} style={styles.icons} onPress={() => { navigation.goBack() }} onLongPress={()=>{navigation.navigate('HomePage')} } />
-                <Text style={styles.title}>Order History</Text>
-                <View style={styles.swipe}>
-                    {/* <IconComunity name={"gesture-swipe"} size={20} />
-                    <Text style={styles.swipeText}>swipe on an item to delete</Text> */}
-                </View>
-            </View>
-            <SwipeItem
-                containerView={ViewOverflow}
-                rightButtons={leftButton}
-            >
-                {history?.map((e) => {
-                    return (<ScrollView style={{ paddingLeft: 25, paddingRight: 25 }} key={e.id}>
-                        <View style={{ backgroundColor: 'white', width: width / 1.15, borderRadius: 20, flexDirection: 'row', padding: 15 }}>
-                            <View>
-                                <Image source={{uri:e.image}} style={styles.imageCard} />
-                            </View>
-                            <View style={{ paddingLeft: 10 }}>
-                                <Text style={styles.cardTitle}>{e.product_name}</Text>
-                                <Text style={styles.cardPrice}>{costing(e.price)}</Text>
-                                <Text style={styles.cardStatus}>{e.status_name}</Text>
-                            </View>
-                        </View>
-                    </ScrollView>)
-                })}
-            </SwipeItem>
-
-        </View>
+      <View style={{padding: 30}}>
+        <IconComunity
+          name={'chevron-left'}
+          size={20}
+          style={styles.icons}
+          onPress={() => {
+            navigation.goBack();
+          }}
+          onLongPress={() => {
+            navigation.navigate('HomePage');
+          }}
+        />
+        <Text style={styles.title}>Order History</Text>
+        {history && history.length !== 0 ? (
+          <View style={styles.swipe}>
+            <IconComunity
+              name={'gesture-tap-hold'}
+              size={20}
+              style={{color: 'brown'}}
+            />
+            <Text style={styles.swipeText}>Hold on an item to delete</Text>
+          </View>
+        ) : (
+          <Text>Sorry we cant find anything</Text>
+        )}
+      </View>
+      {history && history.length > 0 && (
+        <FlatList
+          data={history}
+          renderItem={({item}) => {
+            return (
+              <Card
+                image={item.image}
+                status={item.status_name}
+                productName={item.product_name}
+                subtotal={item.subtotal}
+              />
+            );
+          }}
+          onEndReachedThreshold={0.5}
+          onEndReached={nextItems}
+          ListFooterComponent={renderFooter}
+        />
+      )}
+    </View>
     )
 }
 

@@ -18,12 +18,12 @@ function SplashScreen() {
     navigation.dispatch(StackActions.replace('Welcome'))
   }
 
-  const navigateHome =()=> navigation.dispatch(StackActions.replace('Home'))
+  const navigateHome =()=> navigation.dispatch(StackActions.replace('HomePage'))
 
   useEffect(() => {
     dispatch(userAction.getUserThunk(token, navigateHome, navigateStarted))
   });
-  
+
   return (
     <View style={styles.container}>
       <ImageBackground source={splash} resizeMode="cover" style={styles.bg}>

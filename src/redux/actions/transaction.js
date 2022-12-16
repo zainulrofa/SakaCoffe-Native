@@ -44,10 +44,10 @@ const getHistoryFulfilled = data => ({
   payload: {data},
 });
 
-const getHistoryThunk = token => async dispatch => {
+const getHistoryThunk = (token, params) => async dispatch => {
   try {
     dispatch(getHistoryPending());
-    const result = await apiGetHistory(token);
+    const result = await apiGetHistory(token, params);
     dispatch(getHistoryFulfilled(result.data));
     typeof cbSuccess === 'function' && cbSuccess();
   } catch (error) {
