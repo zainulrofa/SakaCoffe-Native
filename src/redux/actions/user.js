@@ -15,7 +15,7 @@ const getUserFulfilled = data => ({
   payload: { data },
 });
 
-const getUserThunk = (token, cbSuccess, cbDenied) => {
+const getUserThunk = (token, cbSuccess, navigate, cbDenied) => {
     return async dispatch => {
       try {
         dispatch(getUserPending());
@@ -26,13 +26,21 @@ const getUserThunk = (token, cbSuccess, cbDenied) => {
       } catch (error) {
         dispatch(getUserRejected(error));
         // console.log(error);
+        typeof navigate === "function" && navigate();
         typeof cbDenied === "function" && cbDenied(error.response.data.msg);
       }
     };
 };
+
+const reset = () => {
+  return {
+    type: ACTION_STRING.userReset,
+  };
+};
   
 const userAction = {
-    getUserThunk
+  getUserThunk,
+  reset
   };
   
   export default userAction;

@@ -10,6 +10,7 @@ const {
   checkout,
   payment,
   getHistory,
+  transactionReset,
   pending,
   rejected,
   fulfilled,
@@ -89,12 +90,17 @@ const dataPayment = data => {
   };
 };
 
+const reset = () => {
+  return {type: transactionReset};
+};
+
 const transactionActions = {
   createTransactionThunk,
   dataTransaction,
   getHistoryThunk,
   dataCheckout,
   dataPayment,
+  reset,
 };
 
 export default transactionActions;

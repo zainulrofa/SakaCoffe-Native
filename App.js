@@ -17,6 +17,7 @@ import Cart from "./src/screens/transactions/Cart";
 import Checkout from "./src/screens/transactions/Checkout";
 import Payment from "./src/screens/transactions/Payment";
 import History from "./src/screens/transactions/History";
+import Splash from "./src/screens/Splash";
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={'Welcome'}>
+      <Stack.Navigator initialRouteName={'Splash'}>
         <Stack.Screen name='Home' component={Home} options={{headerShown: false,}} />
         <Stack.Screen name='Welcome' component={Welcome} options={{headerShown: false,}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown: false,}}/>
@@ -42,6 +43,7 @@ function App() {
         <Stack.Screen name='Checkout' component={Checkout} options={{headerShown: false,}}/>
         <Stack.Screen name='Payment' component={Payment} options={{headerShown: false,}}/>
         <Stack.Screen name='History' component={History} options={{headerShown: false,}}/>
+        <Stack.Screen name='Splash' component={Splash} options={{headerShown: false,}}/>
       </Stack.Navigator>
    </NavigationContainer>
   )

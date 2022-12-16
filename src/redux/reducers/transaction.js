@@ -32,6 +32,7 @@ const initialState = {
     delivMethod: ''
   },
   history: [],
+  pagination: {},
 };
 
 const transactionReducer = (prevState = initialState, { type, payload }) => {
@@ -42,6 +43,7 @@ const transactionReducer = (prevState = initialState, { type, payload }) => {
     checkout,
     payment,
     logout,
+    transactionReset,
     pending,
     rejected,
     fulfilled,
@@ -83,11 +85,14 @@ const transactionReducer = (prevState = initialState, { type, payload }) => {
         error: payload.error.response.data.msg,
       };
     case getHistory.concat(fulfilled):
+      const newHistory = payload.data.data;
+      const page = payload.data.meta.page;
       return {
         ...prevState,
         isLoading: false,
         isFulfilled: true,
-        history: payload.data.data,
+        history: page > 1 ? [...prevState.history, ...newHistory] : newHistory,
+        pagination: payload.data.meta,
       };
 
     case transactionData:
@@ -147,7 +152,10 @@ const transactionReducer = (prevState = initialState, { type, payload }) => {
           error: payload.error,
         };
       case logout + fulfilled:
-        return initialState
+      return initialState
+    
+      case transactionReset:
+        return initialState;
 
     default:
       return prevState;

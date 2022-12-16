@@ -34,6 +34,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { DrawerItem } from '@react-navigation/drawer';
 import userAction from '../redux/actions/user';
 import authAction from '../redux/actions/auth';
+import { clearState } from '../helpers/clearState';
 
 
 function Navbar({ children }) {
@@ -44,7 +45,7 @@ function Navbar({ children }) {
     const user = useSelector(state => state.profile.profile);
     //   const email = useSelector(state => state.auth.userData.email);
     const auth = useSelector(state => state.auth);
-    console.log(auth.userData.token)
+    // console.log(auth.userData.token)
 
     const toProfile = () => {
         navigation.navigate('Profile');
@@ -61,7 +62,8 @@ function Navbar({ children }) {
                 ToastAndroid.SHORT,
                 ToastAndroid.TOP
             )
-          navigation.navigate('Welcome')
+            navigation.navigate('Welcome')
+            clearState(dispatch)
         }
         const LogoutError = (error) => {
             ToastAndroid.showWithGravityAndOffset(

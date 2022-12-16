@@ -2,16 +2,16 @@ import ACTION_STRING from '../actions/actionString';
 
 const initialState = {
     profile: {
-        username: null,
-        first_name: null,
-        last_name: null,
-        display_name: null,
-        genre: null,
-        birthday: null,
-        address: null,
-        image: null,
-        phone: null,
-        email: null,
+        username: '',
+        first_name: '',
+        last_name: '',
+        display_name: '',
+        gender: '',
+        birthday: '',
+        address: '',
+        image: '',
+        phone: '',
+        email: '',
     },
     isLoading: false,
     isError: false,
@@ -20,7 +20,7 @@ const initialState = {
 };
 
 const userReducer = (prevState = initialState, { type, payload }) => {
-    const { getUser, pending, rejected, fulfilled } = ACTION_STRING;
+    const { getUser, userReset, pending, rejected, fulfilled } = ACTION_STRING;
     switch (type) {
         case getUser + pending:
             return {
@@ -37,16 +37,16 @@ const userReducer = (prevState = initialState, { type, payload }) => {
                 isFulfilled: false,
                 error: payload.error,
                 profile: {
-                    username: null,
-                    first_name: null,
-                    last_name: null,
-                    display_name: null,
-                    genre: null,
-                    birthday: null,
-                    address: null,
-                    image: null,
-                    phone: null,
-                    email: null,
+                    username: '',
+                    first_name: '',
+                    last_name: '',
+                    display_name: '',
+                    gender: '',
+                    birthday: '',
+                    address: '',
+                    image: '',
+                    phone: '',
+                    email: '',
                 },
             };
         case getUser + fulfilled:
@@ -60,7 +60,7 @@ const userReducer = (prevState = initialState, { type, payload }) => {
                     first_name: payload.data.data[0].first_name,
                     last_name: payload.data.data[0].last_name,
                     display_name: payload.data.data[0].display_name,
-                    genre: payload.data.data[0].genre,
+                    gender: payload.data.data[0].gender,
                     birthday: payload.data.data[0].birthday,
                     address: payload.data.data[0].address,
                     image: payload.data.data[0].image,
@@ -68,6 +68,9 @@ const userReducer = (prevState = initialState, { type, payload }) => {
                     email: payload.data.data[0].email,
                 }
             };
+        
+        case userReset:
+            return initialState;
 
         default:
             return prevState;

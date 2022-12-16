@@ -152,12 +152,19 @@ const logoutThunk = (token, cbSuccess, cbDenied) => {
   };
 };
 
+const resetState = () => {
+  return {
+    type: ACTION_STRING.authReset,
+  };
+};
+
 const authAction = {
   registerThunk,
   loginThunk,
   forgotThunk,
   resetThunk,
-  logoutThunk
+  logoutThunk,
+  resetState,
 };
 
 export default authAction;
