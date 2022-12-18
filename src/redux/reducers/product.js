@@ -4,6 +4,7 @@ const initialState = {
     product: [],
     data: [],
     detail: [],
+    pagination: {},
     isLoading: false,
     isError: false,
     isFulfilled: false,
@@ -37,31 +38,35 @@ const productReducer = (prevState = initialState, { type, payload }) => {
                 isFulfilled: true,
                 product: payload.data.data
             };
-        
-            case getAll + pending:
-                return {
-                    ...prevState,
-                    isLoading: true,
-                    isError: false,
-                    isFulfilled: false,
-                };
-            case getAll + rejected:
-                return {
-                    ...prevState,
-                    isError: true,
-                    isLoading: false,
-                    isFulfilled: false,
-                    error: payload.error.response.data.msg,
-                    data: []
-                };
-            case getAll + fulfilled:
-                return {
-                    ...prevState,
-                    isLoading: false,
-                    isError: false,
-                    isFulfilled: true,
-                    data: payload.data.data
-                };
+
+        case getAll + pending:
+            return {
+                ...prevState,
+                isLoading: true,
+                isError: false,
+                isFulfilled: false,
+            };
+        case getAll + rejected:
+            return {
+                ...prevState,
+                isError: true,
+                isLoading: false,
+                isFulfilled: false,
+                error: payload.error.response.data.msg,
+                data: []
+            };
+        case getAll + fulfilled:
+            const newProduct = payload.data.data;
+            const page = payload.data.meta.page;
+            return {
+                ...prevState,
+                isLoading: false,
+                isError: false,
+                isFulfilled: true,
+                data:
+                    page > 1 ? [...prevState.products, ...newProduct] : newProduct,
+                pagination: payload.data.meta,
+            };
 
         case getDetail + pending:
             return {

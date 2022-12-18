@@ -16,10 +16,10 @@ export const getProduct = () => {
   return axios.get(URL);
 }
 
-export const getAllProduct = () => {
-  const URL = `${BaseUrl}api/products?limit=16`;
-  console.log('util', URL);
-  return axios.get(URL);
+export const getAllProduct = (query) => {
+  const URL = `${BaseUrl}api/products?limit=6`;
+  // console.log('util', URL);
+  return axios.get(URL, {params: query});
 }
 
 export const getProductDetail = (id, token) => {

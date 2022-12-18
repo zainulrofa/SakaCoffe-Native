@@ -43,16 +43,6 @@ const Home = () => {
             <Navbar>
                 <ScrollView style={styles.container}>
                     <Text style={styles.title}>A good coffee is a good day</Text>
-                    <View style={styles.wrapperSearch}>
-                        {/* <FontAwesome icon={SolidIcons.search} style={styles.iconSearch} /> */}
-                        <IconIon name={"search-outline"} style={styles.Icons} />
-                        <TextInput
-                            style={styles.textPlaceholder}
-                            placeholder="Search"
-                            placeholderTextColor="grey"
-                        // onChangeText={handlersearch}
-                        />
-                    </View>
                     <Text style={styles.category} onPress={() => { navigation.navigate("ProductDetail") }}>Favorite Products</Text>
                     <Text style={styles.see} onPress={() => { navigation.navigate("AllProduct") }}>See more</Text>
 
@@ -74,7 +64,7 @@ const Home = () => {
                             />
                         })}
                     </ScrollView>}
-                    <Text style={styles.category}>Promo for you</Text>
+                    {/* <Text style={styles.category}>Promo for you</Text>
                     <Text style={styles.see} onPress={() => { navigation.navigate("ScreenPromo") }}>See more</Text>
                     <ScrollView
                         showsHorizontalScrollIndicator={false}
@@ -126,7 +116,7 @@ const Home = () => {
                                 <Text style={styles.cardPrice}>IDR 25.000</Text>
                             </View>
                         </Pressable>
-                    </ScrollView>
+                    </ScrollView> */}
                 </ScrollView>
             </Navbar>
         </View>

@@ -59,12 +59,12 @@ const getProductThunk = (cbSuccess, cbDenied) => {
   };
 };
 
-const getAllThunk = (cbSuccess, cbDenied) => {
+const getAllThunk = (query, cbSuccess, cbDenied) => {
   return async dispatch => {
     try {
       dispatch(getAllPending());
       // console.log('redux', body);
-      const result = await getAllProduct();
+      const result = await getAllProduct(query);
       dispatch(getAllFulfilled(result.data));
       typeof cbSuccess === "function" && cbSuccess();
     } catch (error) {
