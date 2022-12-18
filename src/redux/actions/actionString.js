@@ -7,6 +7,7 @@ const ACTION_STRING = {
   reset: 'AUTH_RESET',
   logout: 'AUTH_LOGOUT',
   getUser: 'GET_USER',
+  editProfile: 'EDIT_PROFILE',
   getProduct: 'GET_PRODUCT',
   getAll: 'GET_ALL',
   getDetail: 'GET_DETAIL',

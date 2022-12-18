@@ -15,3 +15,6 @@ export const getUser = (token) => {
   // console.log('util', URL);
   return axios.get(URL, config(token));
 }
+
+export const editUser = (body, token) =>
+  axios.patch(`${BaseUrl}api/users/edit-profile`, body, config(token));

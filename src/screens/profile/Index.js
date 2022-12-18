@@ -42,7 +42,7 @@ const Profile = () => {
         <Text style={styles.titleContent}>My profile</Text>
         <View style={styles.subTitle}>
           <Text style={styles.textInfo}>Your Information</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('EditUser')}>
             <Text style={styles.btnEdit}>edit</Text>
           </TouchableOpacity>
         </View>
