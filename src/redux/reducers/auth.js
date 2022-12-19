@@ -5,6 +5,7 @@ const initialState = {
   userData: {
     id: '',
     token: '',
+    role: '',
   },
   isLoading: false,
   isError: false,
@@ -129,9 +130,6 @@ const authReducer = (prevState = initialState, { type, payload }) => {
         error: payload.error,
       };
     case logout + fulfilled:
-      return initialState;
-
-    case reset:
       return initialState;
 
     default:

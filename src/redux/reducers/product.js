@@ -4,6 +4,7 @@ const initialState = {
     product: [],
     data: [],
     detail: [],
+    promo: [],
     pagination: {},
     isLoading: false,
     isError: false,
@@ -12,7 +13,7 @@ const initialState = {
 };
 
 const productReducer = (prevState = initialState, { type, payload }) => {
-    const { getProduct, getDetail, getAll, pending, rejected, fulfilled } = ACTION_STRING;
+    const { getProduct, getDetail, getAll, getPromo, pending, rejected, fulfilled } = ACTION_STRING;
     switch (type) {
         case getProduct + pending:
             return {
@@ -64,7 +65,7 @@ const productReducer = (prevState = initialState, { type, payload }) => {
                 isError: false,
                 isFulfilled: true,
                 data:
-                    page > 1 ? [...prevState.products, ...newProduct] : newProduct,
+                    page > 1 ? [...prevState.product, ...newProduct] : newProduct,
                 pagination: payload.data.meta,
             };
 
@@ -92,6 +93,32 @@ const productReducer = (prevState = initialState, { type, payload }) => {
                 isFulfilled: true,
                 detail: payload.data.data
             };
+        
+            case getPromo + pending:
+                return {
+                    ...prevState,
+                    isLoading: true,
+                    isError: false,
+                    isFulfilled: false,
+                };
+            case getPromo + rejected:
+                return {
+                    ...prevState,
+                    isError: true,
+                    isLoading: false,
+                    isFulfilled: false,
+                    error: payload.error.response.data.msg,
+                };
+        case getPromo + fulfilled:
+            const newPromo = payload.data.data;
+            const pagePromo = payload.data.meta.page;
+                return {
+                    ...prevState,
+                    isLoading: false,
+                    isError: false,
+                    isFulfilled: true,
+                    promo: pagePromo > 1 ? [...prevState.promo, ...newPromo] : newPromo
+                };
 
         default:
             return prevState;

@@ -26,3 +26,9 @@ export const getProductDetail = (id, token) => {
   const URL = `${BaseUrl}api/products/${id}`
   return axios.get(URL, id, config(token))
 }
+
+export const getPromo = (query) => {
+  const URL = `${BaseUrl}api/promos?limit=6`;
+  // console.log('util', URL);
+  return axios.get(URL, {params: query});
+}

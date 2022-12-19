@@ -18,7 +18,7 @@ export const register = body => {
 
 export const login = body => {
   const URL = `${BaseUrl}api/auths/login`;
-  // console.log('util', body);
+  console.log('util', URL);
   return axios.post(URL, body);
 };
 

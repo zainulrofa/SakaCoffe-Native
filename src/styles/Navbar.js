@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   },
   username: {
     fontFamily: 'Poppins-SemiBold',
+    fontWeight: 'bold',
     color: 'white',
     fontSize: 17,
     paddingTop: 10
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
   },
   textBottom: {
     fontFamily: 'Poppins-Bold',
+    fontWeight: 'bold',
     fontSize: 17,
     color: '#6A4029'
   },

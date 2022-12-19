@@ -10,6 +10,7 @@ const ACTION_STRING = {
   editProfile: 'EDIT_PROFILE',
   getProduct: 'GET_PRODUCT',
   getAll: 'GET_ALL',
+  getPromo: 'GET_PROMO',
   getDetail: 'GET_DETAIL',
   createTransaction: 'CREATE_TRANSACTION',
   transactionData: 'TRANSACTION_DATA',

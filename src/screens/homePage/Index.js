@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../../styles/HomePage';
 import Navbar from "../../components/Navbar"
 import Card from "../../components/CardProduct";
+import CardPromo from "../../components/CardPromo";
 import Sample from "../../assets/images/product.png"
 import FontAwesome, { SolidIcons } from 'react-native-fontawesome';
 import IconIon from 'react-native-vector-icons/Ionicons'
@@ -30,6 +31,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false)
     const products = useSelector(state => state.product.product)
+    const promo = useSelector(state => state.product.promo)
     const isPending = useSelector(state => state.product.isLoading)
 
     
@@ -37,6 +39,10 @@ const Home = () => {
     // console.log(products)
     useEffect(() => {
         dispatch(productAction.getProductThunk())
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(productAction.getPromoThunk())
     }, [dispatch])
     return (
         <View style={styles.sectionContainer}>
@@ -47,7 +53,7 @@ const Home = () => {
                     <Text style={styles.see} onPress={() => { navigation.navigate("AllProduct") }}>See more</Text>
 
                     {isPending ? <View style={styles.btnLoading}>
-                        <ActivityIndicator size='large' color='black' />
+                        <ActivityIndicator size='large' color='#895537' />
                     </View> : products.length > 0 && !isPending && <ScrollView
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
@@ -64,59 +70,26 @@ const Home = () => {
                             />
                         })}
                     </ScrollView>}
-                    {/* <Text style={styles.category}>Promo for you</Text>
-                    <Text style={styles.see} onPress={() => { navigation.navigate("ScreenPromo") }}>See more</Text>
-                    <ScrollView
+                    <Text style={styles.category}>Promo for you</Text>
+                    <Text style={styles.see} onPress={() => { navigation.navigate("AllPromo") }}>See more</Text>
+                    {isPending ? <View style={styles.btnLoading}>
+                        <ActivityIndicator size='large' color='#895537' />
+                    </View> : promo.length > 0 && !isPending && <ScrollView
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
+                        keyboardShouldPersistTaps={'always'}
                         style={{ height: height / 2, }}
                     >
-                        <Pressable style={styles.card}>
-                            <View style={styles.containerImage}>
-                                <Image source={Sample} style={styles.imageCard} />
-                            </View>
-                            <View style={styles.containerTitle}>
-                                <Text style={styles.cardTitle}>Hazelnut Latte</Text>
-                                <Text style={styles.cardPrice}>IDR 25.000</Text>
-                            </View>
-                        </Pressable>
-                        <Pressable style={styles.card}>
-                            <View style={styles.containerImage}>
-                                <Image source={Sample} style={styles.imageCard} />
-                            </View>
-                            <View style={styles.containerTitle}>
-                                <Text style={styles.cardTitle}>Hazelnut Latte</Text>
-                                <Text style={styles.cardPrice}>IDR 25.000</Text>
-                            </View>
-                        </Pressable>
-                        <Pressable style={styles.card}>
-                            <View style={styles.containerImage}>
-                                <Image source={Sample} style={styles.imageCard} />
-                            </View>
-                            <View style={styles.containerTitle}>
-                                <Text style={styles.cardTitle}>Hazelnut Latte</Text>
-                                <Text style={styles.cardPrice}>IDR 25.000</Text>
-                            </View>
-                        </Pressable>
-                        <Pressable style={styles.card}>
-                            <View style={styles.containerImage}>
-                                <Image source={Sample} style={styles.imageCard} />
-                            </View>
-                            <View style={styles.containerTitle}>
-                                <Text style={styles.cardTitle}>Hazelnut Latte</Text>
-                                <Text style={styles.cardPrice}>IDR 25.000</Text>
-                            </View>
-                        </Pressable>
-                        <Pressable style={styles.card}>
-                            <View style={styles.containerImage}>
-                                <Image source={Sample} style={styles.imageCard} />
-                            </View>
-                            <View style={styles.containerTitle}>
-                                <Text style={styles.cardTitle}>Hazelnut Latte</Text>
-                                <Text style={styles.cardPrice}>IDR 25.000</Text>
-                            </View>
-                        </Pressable>
-                    </ScrollView> */}
+                        {promo?.map((e) => {
+                            return <CardPromo
+                                name={e.code}
+                                code={e.promo_name}
+                                img={e.image}
+                                id={e.id}
+                                key={e.id}
+                            />
+                        })}
+                    </ScrollView>}
                 </ScrollView>
             </Navbar>
         </View>

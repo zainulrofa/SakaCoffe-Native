@@ -85,8 +85,7 @@ function EditProfile() {
       bodies.append('image', {
         name: 'test.' + file[0]?.type?.substr(6),
         type: file[0]?.type,
-        uri:
-          Platform.OS !== 'android' ? 'file://' + file[0]?.uri : file[0]?.uri,
+        uri: Platform.OS !== 'android' ? 'file://' + file[0]?.uri : file[0]?.uri,
       });
     if (body?.username) bodies.append('username', body.username);
     if (body?.username) bodies.append('username', body.username);

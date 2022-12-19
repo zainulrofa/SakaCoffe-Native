@@ -12,7 +12,7 @@ const config = (token) => {
 
 export const getUser = (token) => {
   const URL = `${BaseUrl}api/users`;
-  // console.log('util', URL);
+  console.log('util', URL);
   return axios.get(URL, config(token));
 }
 

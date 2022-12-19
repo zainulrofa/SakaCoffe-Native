@@ -97,8 +97,15 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     paddingRight: 25,
     // fontFamily: 'Poppins-Reguler',
+    fontWeight: 'bold',
     fontSize: 15,
     color: '#6A4029'
+  },
+  btnLoading: {
+    width: 168,
+    height: 450,
+    justifyContent: 'center',
+    alignSelf: 'center'
   }
 });
 

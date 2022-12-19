@@ -50,11 +50,11 @@ function Navbar({ children }) {
     const toProfile = () => {
         navigation.navigate('Profile');
     };
-    
+
     const toHistory = () => {
         navigation.navigate('History');
-      };
-    
+    };
+
     const logoutHandler = () => {
         const LogoutSuccess = () => {
             ToastAndroid.showWithGravity(
@@ -79,13 +79,13 @@ function Navbar({ children }) {
 
     useEffect(() => {
         dispatch(userAction.getUserThunk(auth.userData.token))
-    },[dispatch])
+    }, [dispatch])
 
     const renderDrawer = () => {
         return (
             <View>
                 <View style={styles.continerSwipe}>
-                    <Image source={{uri:user.image}} style={styles.imageDrawer} />
+                    <Image source={{ uri: user.image }} style={styles.imageDrawer} />
                     <Text style={styles.username}>{user.username}</Text>
                     <Text style={styles.email}>{user.email}</Text>
                 </View>
@@ -143,17 +143,16 @@ function Navbar({ children }) {
                             <View style={{ display: 'flex', flexDirection: 'row' }}>
                                 <Pressable
                                     style={[styles.button, styles.buttonClose]}
-                                    onPress={logoutHandler}
-                                >
-                                    {auth.isLoading ? <ActivityIndicator size='small' color='white' /> : <Text style={styles.textStyle}>YES</Text>}
-                                </Pressable>
-                                <Pressable
-                                    style={[styles.button, styles.buttonClose]}
                                     onPress={() => setModalVisible(!modalVisible)}
                                 >
                                     <Text style={styles.textStyle}>NO</Text>
                                 </Pressable>
-
+                                <Pressable
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={logoutHandler}
+                                >
+                                    {auth.isLoading ? <ActivityIndicator size='small' color='white' /> : <Text style={styles.textStyle}>YES</Text>}
+                                </Pressable>
                             </View>
                         </View>
                     </View>

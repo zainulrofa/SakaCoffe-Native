@@ -1,5 +1,5 @@
 import ACTION_STRING from './actionString';
-import { getProduct, getAllProduct, getProductDetail } from "../../utils/product";
+import { getProduct, getAllProduct, getProductDetail, getPromo } from "../../utils/product";
 
 const getProductPending = () => ({
   type: ACTION_STRING.getProduct.concat(ACTION_STRING.pending),
@@ -40,6 +40,20 @@ const getDetailRejected = error => ({
 
 const getDetailFulfilled = data => ({
   type: ACTION_STRING.getDetail.concat(ACTION_STRING.fulfilled),
+  payload: { data },
+});
+
+const getPromoPending = () => ({
+  type: ACTION_STRING.getPromo.concat(ACTION_STRING.pending),
+});
+
+const getPromoRejected = error => ({
+  type: ACTION_STRING.getPromo.concat(ACTION_STRING.rejected),
+  payload: { error },
+});
+
+const getPromoFulfilled = data => ({
+  type: ACTION_STRING.getPromo.concat(ACTION_STRING.fulfilled),
   payload: { data },
 });
 
@@ -91,8 +105,24 @@ const getDetailThunk = (params, token, cbSuccess, cbDenied) => {
   };
 };
 
+const getPromoThunk = (query, cbSuccess, cbDenied) => {
+  return async dispatch => {
+    try {
+      dispatch(getPromoPending());
+      // console.log('redux', body);
+      const result = await getPromo(query);
+      dispatch(getPromoFulfilled(result.data));
+      typeof cbSuccess === "function" && cbSuccess();
+    } catch (error) {
+      dispatch(getPromoRejected(error));
+      // console.log(error);
+      typeof cbDenied === "function" && cbDenied(error.response.data.msg);
+    }
+  };
+};
+
 const productAction = {
-  getProductThunk, getDetailThunk, getAllThunk
+  getProductThunk, getDetailThunk, getAllThunk, getPromoThunk
 };
 
 export default productAction;
