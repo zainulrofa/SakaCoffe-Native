@@ -9,8 +9,19 @@ import {
 import bg from '../../assets/images/bgWelcome.png';
 import styles from "../../styles/Wlcm";
 import { useNavigation } from '@react-navigation/native';
+import PushNotification from 'react-native-push-notification';
   
 const App = () => {
+
+  // const handleNotif = msg => {
+  //   PushNotification.localNotification({
+  //     channelId: 'local-notification',
+  //     title: 'Test Notif',
+  //     message: msg,
+  //     autoCancel: true,
+  //   })
+  // }
+
   const navigation = useNavigation()
     return (
       <View style={styles.container}>

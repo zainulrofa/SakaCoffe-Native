@@ -106,6 +106,11 @@ const styles = StyleSheet.create({
     height: 450,
     justifyContent: 'center',
     alignSelf: 'center'
+  },
+   addCircle: {
+    fontSize: 80,
+    marginHorizontal: 3,
+    color: '#6A4029',
   }
 });
 

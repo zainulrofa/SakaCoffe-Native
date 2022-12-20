@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import cartAction from '../redux/actions/transaction'
 // import axios from 'axios';
 import transactionActions from '../../redux/actions/transaction';
+import PushNotification from 'react-native-push-notification';
 
 function Payment() {
 
@@ -52,6 +53,12 @@ console.log(Payment)
                     25,
                     50
                 );
+                PushNotification.localNotification({
+                    channelId: 'local-notification',
+                    title: 'Transaction Notification',
+                    message: 'Transaction created succesfully, Please complete your payment immediately!',
+                    autoCancel: true,
+                  })
             // setLoading(true)
             // console.log(sendBody)
 

@@ -33,8 +33,10 @@ const Home = () => {
     const products = useSelector(state => state.product.product)
     const promo = useSelector(state => state.product.promo)
     const isPending = useSelector(state => state.product.isLoading)
+    const role = useSelector(state => state.auth.userData.role)
+    // console.log(role)
 
-    
+
     // const profile = useSelector(state => state.profile.profile);
     // console.log(products)
     useEffect(() => {
@@ -90,7 +92,11 @@ const Home = () => {
                             />
                         })}
                     </ScrollView>}
+                    <Pressable>
+                        <IconIon name={"add-circle"} style={styles.addCircle} />
+                    </Pressable>
                 </ScrollView>
+
             </Navbar>
         </View>
     );
