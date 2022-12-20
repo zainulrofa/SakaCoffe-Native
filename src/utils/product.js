@@ -4,7 +4,7 @@ const BaseUrl = process.env.BACKEND_URL
 
 const config = (token) => {
     return {
-      Headers: {
+      headers: {
         "x-access-token": `${token}`,
       },
     };
@@ -29,7 +29,7 @@ export const getProductDetail = (id, token) => {
 
 export const getPromoDetail = (id, token) => {
   const URL = `${BaseUrl}api/promos/${id}`
-  console.log(URL)
+  // console.log(URL)
   return axios.get(URL, id, config(token))
 }
 

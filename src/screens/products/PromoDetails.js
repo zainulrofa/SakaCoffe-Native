@@ -30,13 +30,13 @@ function ProductDetail(props) {
     const navigation = useNavigation()
     const dispatch = useDispatch()
     const productId = props.route.params
-    const token = useSelector(state => state.auth.userData.token)
+    const auth = useSelector(state => state.auth.userData)
     const role = useSelector(state => state.auth.userData.role)
     const detail = useSelector(state => state.product.detailPromo)
     const [size, setSize] = useState('1')
     const [modalVisible, setModalVisible] = useState(false);
 
-    console.log(detail)
+    console.log(auth)
 
     const addCart = () => {
         if (!modalVisible) return setModalVisible(true);
@@ -57,7 +57,7 @@ function ProductDetail(props) {
     }
 
     useEffect(() => {
-        dispatch(productAction.getPromoDetailThunk(productId, token))
+        dispatch(productAction.getPromoDetailThunk(productId, auth.token))
     }, [dispatch])
 
     // useEffect(()=>{

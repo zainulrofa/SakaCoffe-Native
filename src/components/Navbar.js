@@ -45,8 +45,9 @@ function Navbar({ children }) {
     const user = useSelector(state => state.profile.profile);
     const role = useSelector(state => state.auth.userData.role)
     //   const email = useSelector(state => state.auth.userData.email);
-    const auth = useSelector(state => state.auth);
-    // console.log(auth.userData.token)
+    const token = useSelector(state => state.auth.userData.token);
+    const isLoading = useSelector(state => state.auth.isLoading);
+    console.log(role)
 
     const toProfile = () => {
         navigation.navigate('Profile');
@@ -76,12 +77,12 @@ function Navbar({ children }) {
                 50
             );
         }
-        dispatch(authAction.logoutThunk(auth.userData.token, LogoutSuccess, LogoutError))
+        dispatch(authAction.logoutThunk(token, LogoutSuccess, LogoutError))
     }
 
     useEffect(() => {
-        dispatch(userAction.getUserThunk(auth.userData.token))
-    }, [dispatch])
+        dispatch(userAction.getUserThunk(token))
+    }, [dispatch, token])
 
     const renderDrawer = () => {
         return (
@@ -98,11 +99,16 @@ function Navbar({ children }) {
                             <Icons name={"user-circle"} size={20} style={styles.imageBottom} label="Close drawer"
                             onPress={() => props.navigation.closeDrawer()}/>
                         </DrawerItem> */}
-                        {!role === 'Admin' && <Pressable style={styles.containerBottom} onPress={toProfile}>
+                        {role === 'Admin' ? <Pressable style={styles.containerBottom} >
+                            {/* <Image source={IconUser} style={styles.imageBottom}/> */}
+                            <Icons name={"user-circle"} size={20} style={styles.imageBottom} />
+                            <Text style={styles.textBottom}>Edit Profile</Text>
+                        </Pressable> : <Pressable style={styles.containerBottom} onPress={() => { navigation.navigate("Profile") }}>
                             {/* <Image source={IconUser} style={styles.imageBottom}/> */}
                             <Icons name={"user-circle"} size={20} style={styles.imageBottom} />
                             <Text style={styles.textBottom}>Edit Profile</Text>
                         </Pressable>}
+                        
                         <Divider style={{ width: "90%", margin: 3 }} />
                         <Pressable style={styles.containerBottom} onPress={toHistory}>
                             {/* <Image source={IconUser} style={styles.imageBottom}/> */}
@@ -116,9 +122,9 @@ function Navbar({ children }) {
                             <Text style={styles.textBottom}>All menu</Text>
                         </View>
                         <Divider style={{ width: "90%", margin: 3 }} />
-                        <Pressable style={styles.containerBottom} onPress={() => { navigation.navigate("Dashboard")}}>
+                        <Pressable style={styles.containerBottom} onPress={() => { navigation.navigate("Dashboard") }}>
                             <Icons name={"sticky-note"} size={20} style={styles.imageBottom} />
-                            {!role === 'Admin' ? <Text style={styles.textBottom}>Privacy policy</Text> : <Text style={styles.textBottom}>Sales Report</Text>}
+                            {role === 'Admin' ? <Text style={styles.textBottom}>Sales report</Text> : <Text style={styles.textBottom}>Privacy policy</Text>}
                         </Pressable>
                         <Divider style={{ width: "90%", margin: 3 }} />
                         <View style={styles.containerBottom}>
@@ -154,7 +160,7 @@ function Navbar({ children }) {
                                     style={[styles.button, styles.buttonClose]}
                                     onPress={logoutHandler}
                                 >
-                                    {auth.isLoading ? <ActivityIndicator size='small' color='white' /> : <Text style={styles.textStyle}>YES</Text>}
+                                    {isLoading ? <ActivityIndicator size='small' color='white' /> : <Text style={styles.textStyle}>YES</Text>}
                                 </Pressable>
                             </View>
                         </View>
