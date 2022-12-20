@@ -20,6 +20,7 @@ import History from "./src/screens/transactions/History";
 import Splash from "./src/screens/Splash";
 import EditUser from "./src/screens/profile/EditProfile";
 import AllPromo from "./src/screens/products/AllPromo";
+import NewProduct from "./src/screens/admin/NewProduct";
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
         <Stack.Screen name='Splash' component={Splash} options={{headerShown: false,}}/>
         <Stack.Screen name='EditUser' component={EditUser} options={{headerShown: false,}}/>
         <Stack.Screen name='AllPromo' component={AllPromo} options={{headerShown: false,}}/>
+        <Stack.Screen name='NewProduct' component={NewProduct} options={{headerShown: false,}}/>
       </Stack.Navigator>
    </NavigationContainer>
   )
