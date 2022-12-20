@@ -13,15 +13,6 @@ import PushNotification from 'react-native-push-notification';
   
 const App = () => {
 
-  // const handleNotif = msg => {
-  //   PushNotification.localNotification({
-  //     channelId: 'local-notification',
-  //     title: 'Test Notif',
-  //     message: msg,
-  //     autoCancel: true,
-  //   })
-  // }
-
   const navigation = useNavigation()
     return (
       <View style={styles.container}>
