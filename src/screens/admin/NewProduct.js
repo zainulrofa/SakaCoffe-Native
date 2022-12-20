@@ -32,7 +32,7 @@ function NewProduct() {
         50,
       );
       console.log(id);
-      navigation.navigate('ProductDetail', id);
+      navigation.navigate('AllProduct');
     };
     const error = error => {
       ToastAndroid.showWithGravityAndOffset(
@@ -120,7 +120,6 @@ function NewProduct() {
         <Text style={styles.titleNavbar}>New product</Text>
       </View>
         <View style={styles.all_container}>
-          <View></View>
           <View style={styles.container_up}>
             <Image source={file ? {uri: file[0].uri} : camera} style={styles.image} />
             <ButtonOpacity
@@ -249,7 +248,7 @@ function NewProduct() {
           <View>
             <ButtonOpacity
               color={'#6A4029'}
-              text="Add more picture"
+              text="Save Product"
               radius={20}
               colorText="white"
               height={70}

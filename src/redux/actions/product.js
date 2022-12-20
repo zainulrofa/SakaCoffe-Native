@@ -1,5 +1,13 @@
 import ACTION_STRING from './actionString';
-import { getProduct, getAllProduct, getProductDetail, getPromo, createProduct, createPromo } from "../../utils/product";
+import {
+  getProduct,
+  getAllProduct,
+  getProductDetail,
+  getPromo,
+  createProduct,
+  createPromo,
+  editProduct
+} from "../../utils/product";
 
 const getProductPending = () => ({
   type: ACTION_STRING.getProduct.concat(ACTION_STRING.pending),
@@ -83,6 +91,20 @@ const createPromoRejected = error => ({
 const createPromoFulfilled = data => ({
   type: ACTION_STRING.createPromo.concat(ACTION_STRING.fulfilled),
   payload: { data },
+});
+
+const editProductPending = () => ({
+  type: ACTION_STRING.editProduct.concat(ACTION_STRING.pending),
+});
+
+const editProductRejected = error => ({
+  type: ACTION_STRING.editProduct.concat(ACTION_STRING.rejected),
+  payload: {error},
+});
+
+const editProductFulfilled = data => ({
+  type: ACTION_STRING.editProduct.concat(ACTION_STRING.fulfilled),
+  payload: {data},
 });
 
 const getProductThunk = (cbSuccess, cbDenied) => {
@@ -177,6 +199,20 @@ const createProductThunk =
     }
   };
 
+  const editProductThunk = (id, body, token, cbSuccess, cbDenied) => {
+    return async dispatch => {
+      try {
+        dispatch(editProductPending());
+        const result = await editProduct(id, body, token);
+        dispatch(editProductFulfilled(result.data));
+        typeof cbSuccess === 'function' && cbSuccess();
+      } catch (error) {
+        dispatch(editProductRejected(error));
+        typeof cbDenied === 'function' && cbDenied(error.response.data.msg);
+      }
+    };
+  };
+
 const productAction = {
   getProductThunk,
   getDetailThunk,
@@ -184,6 +220,7 @@ const productAction = {
   getPromoThunk,
   createProductThunk,
   createPromoThunk,
+  editProductThunk
 };
 
 export default productAction;

@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     borderColor: `#BCBABA`,
     borderWidth: 0,
     fontFamily: 'Poppins',
-    fontSize: 14,
+    fontSize: 15,
     height: 40,
     marginTop: 10,
     marginBottom: 10,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   text: {
     color: `black`,
     fontFamily: `Poppins`,
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: '900',
   },
   image: {

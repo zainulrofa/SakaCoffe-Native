@@ -42,3 +42,9 @@ export const createPromo = (body, token) => {
   const URL = `${BaseUrl}api/promos/`
   return axios.post(URL, body, config(token))
 }
+
+export const editProduct = (id, body, token) => {
+  const URL = `${BaseUrl}api/products/${id}`
+  console.log(URL)
+  return axios.patch(URL, body, config(token))
+}

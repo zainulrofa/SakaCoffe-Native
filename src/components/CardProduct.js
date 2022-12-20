@@ -24,7 +24,7 @@ const CardProduct = ({ img, name, price, id }) => {
         <Pressable style={styles.card} onPress={() => { navigation.navigate("ProductDetail", id) }}>
             {role === 'Admin' && <Pressable
                 style={styles.conPencl}
-                onPress={() => setModalVisible(true)}>
+                onPress={() => {navigation.navigate('EditProduct',id)}}>
                 <IconComunity name={'pencil'} style={styles.pencil} size={20} />
             </Pressable>}
             

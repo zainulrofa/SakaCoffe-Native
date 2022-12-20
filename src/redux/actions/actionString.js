@@ -8,6 +8,8 @@ const ACTION_STRING = {
   logout: 'AUTH_LOGOUT',
   getUser: 'GET_USER',
   editProfile: 'EDIT_PROFILE',
+  editProduct: 'EDIT_PRODUCT',
+  editPromo: 'EDIT_PROMO',
   getProduct: 'GET_PRODUCT',
   getAll: 'GET_ALL',
   getPromo: 'GET_PROMO',

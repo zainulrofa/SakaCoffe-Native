@@ -90,7 +90,7 @@ function ProductDetail(props) {
         <View style={styles.container}>
             <View style={styles.navbar}>
                 <IconComunity name='chevron-left' size={22} style={styles.icon} onPress={() => { navigation.goBack() }} />
-                {role === "Admin" ? <IconComunity name='pencil-outline' size={22} style={styles.icon} />
+                {role === "Admin" ? <IconComunity name='pencil-outline' size={22} style={styles.icon} onPress={() => { navigation.navigate('EditProduct',productId) }}/>
                     : <IconComunity name='cart-outline' size={22} style={styles.icon} />
                 }
             </View>
