@@ -25,6 +25,7 @@ import NewPromo from "./src/screens/admin/NewPromo";
 import EditProduct from "./src/screens/admin/EditProduct";
 import EditPromo from "./src/screens/admin/EditPromo";
 import PromoDetails from "./src/screens/products/PromoDetails";
+import Dashboard from "./src/screens/dashboard/Index";
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
         <Stack.Screen name='EditProduct' component={EditProduct} options={{headerShown: false,}}/>
         <Stack.Screen name='EditPromo' component={EditPromo} options={{headerShown: false,}}/>
         <Stack.Screen name='PromoDetails' component={PromoDetails} options={{headerShown: false,}}/>
+        <Stack.Screen name='Dashboard' component={Dashboard} options={{headerShown: false,}}/>
       </Stack.Navigator>
    </NavigationContainer>
   )

@@ -88,7 +88,7 @@ function Navbar({ children }) {
             <View>
                 <View style={styles.continerSwipe}>
                     {user.image ? <Image source={{ uri: user.image }} style={styles.imageDrawer} /> :
-                    <Image source={User} style={styles.imageDrawer} />}
+                        <Image source={User} style={styles.imageDrawer} />}
                     <Text style={styles.username}>{user.username ? user.username : `Admin`}</Text>
                     <Text style={styles.email}>{user.email}</Text>
                 </View>
@@ -107,7 +107,7 @@ function Navbar({ children }) {
                         <Pressable style={styles.containerBottom} onPress={toHistory}>
                             {/* <Image source={IconUser} style={styles.imageBottom}/> */}
                             <IconComunity name={"cart-arrow-down"} size={20} style={styles.imageBottom} />
-                            <Text style={styles.textBottom}>History</Text>
+                            <Text style={styles.textBottom}>Orders</Text>
                         </Pressable>
                         <Divider style={{ width: "90%", margin: 3 }} />
                         <View style={styles.containerBottom}>
@@ -116,10 +116,10 @@ function Navbar({ children }) {
                             <Text style={styles.textBottom}>All menu</Text>
                         </View>
                         <Divider style={{ width: "90%", margin: 3 }} />
-                        <View style={styles.containerBottom}>
+                        <Pressable style={styles.containerBottom} onPress={() => { navigation.navigate("Dashboard")}}>
                             <Icons name={"sticky-note"} size={20} style={styles.imageBottom} />
-                            <Text style={styles.textBottom}>Privacy policy</Text>
-                        </View>
+                            {!role === 'Admin' ? <Text style={styles.textBottom}>Privacy policy</Text> : <Text style={styles.textBottom}>Sales Report</Text>}
+                        </Pressable>
                         <Divider style={{ width: "90%", margin: 3 }} />
                         <View style={styles.containerBottom}>
                             {/* <Image source={IconUser} style={styles.imageBottom}/> */}
