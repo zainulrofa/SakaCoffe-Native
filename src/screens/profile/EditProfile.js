@@ -258,7 +258,7 @@ function EditProfile() {
       <View style={{marginBottom: 15}}>
         <Text style={styles.label}>Phone Number :</Text>
         <TextInput
-          placeholder={profile.phone}
+          placeholder={`+62 ${profile.phone}`}
           style={styles.input}
           placeholderTextColor="black"
           editable={false}
@@ -340,7 +340,8 @@ function EditProfile() {
             <Text
               style={{
                 color: 'white',
-                fontFamily: 'Poppins-Black',
+                  fontFamily: 'Poppins-Black',
+                fontWeight: 'bold',
                 fontSize: 17,
               }}>
               Save and Update
