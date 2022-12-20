@@ -4,7 +4,7 @@ const BaseUrl = process.env.BACKEND_URL
 
 const config = (token) => {
     return {
-      Headers: {
+      headers: {
         "x-access-token": `${token}`,
       },
     };
