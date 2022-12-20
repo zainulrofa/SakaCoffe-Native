@@ -8,12 +8,12 @@ import { useSelector } from 'react-redux';
 // import Sample from "../assets/images/product.png"
 
 
-const CardPromo = ({ img, name, code}) => {
-    // const navigation = useNavigation()
+const CardPromo = ({ id,img, name, code}) => {
+    const navigation = useNavigation()
     const role = useSelector(state => state.auth.userData.role)
 
     return (
-        <Pressable style={styles.card}>
+        <Pressable style={styles.card} onPress={() => { navigation.navigate("PromoDetails", id) }}>
             {role === 'Admin' && <Pressable
                 style={styles.conPencl}
                 onPress={() => setModalVisible(true)}>

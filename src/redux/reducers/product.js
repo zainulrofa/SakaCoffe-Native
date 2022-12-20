@@ -4,6 +4,7 @@ const initialState = {
     product: [],
     data: [],
     detail: [],
+    detailPromo: [],
     promo: [],
     pagination: {},
     isLoading: false,
@@ -13,7 +14,7 @@ const initialState = {
 };
 
 const productReducer = (prevState = initialState, { type, payload }) => {
-    const { getProduct, getDetail, getAll, getPromo, createProduct, createPromo, editProduct, pending, rejected, fulfilled } = ACTION_STRING;
+    const { getProduct, getDetail, getAll, getPromo, createProduct, createPromo, editProduct, getPromoDetail, editPromo, pending, rejected, fulfilled } = ACTION_STRING;
     switch (type) {
         case getProduct + pending:
             return {
@@ -185,7 +186,55 @@ const productReducer = (prevState = initialState, { type, payload }) => {
                 isFulfilled: true,
                 detail: { ...prevState.detail, ...payload.data.data },
             };
-
+        
+            case getPromoDetail + pending:
+                return {
+                    ...prevState,
+                    isLoading: true,
+                    isError: false,
+                    isFulfilled: false,
+                };
+            case getPromoDetail + rejected:
+                return {
+                    ...prevState,
+                    isError: true,
+                    isLoading: false,
+                    isFulfilled: false,
+                    error: payload.error.response.data.msg,
+                };
+            case getPromoDetail + fulfilled:
+                return {
+                    ...prevState,
+                    isLoading: false,
+                    isError: false,
+                    isFulfilled: true,
+                    detailPromo: payload.data.data
+            };
+        
+            case editPromo + pending:
+                return {
+                    ...prevState,
+                    isLoading: true,
+                    isError: false,
+                    isFulfilled: false,
+                };
+            case editPromo + rejected:
+                return {
+                    ...prevState,
+                    isError: true,
+                    isLoading: false,
+                    isFulfilled: false,
+                    error: payload.error.message,
+                };
+            case editPromo + fulfilled:
+                return {
+                    ...prevState,
+                    isLoading: false,
+                    isError: false,
+                    isFulfilled: true,
+                    detailPromo: { ...prevState.detailPromo, ...payload.data.data },
+                };
+    
         default:
             return prevState;
     }

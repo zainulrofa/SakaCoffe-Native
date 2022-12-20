@@ -4,7 +4,7 @@ const BaseUrl = process.env.BACKEND_URL
 
 const config = (token) => {
     return {
-      headers: {
+      Headers: {
         "x-access-token": `${token}`,
       },
     };
@@ -27,6 +27,12 @@ export const getProductDetail = (id, token) => {
   return axios.get(URL, id, config(token))
 }
 
+export const getPromoDetail = (id, token) => {
+  const URL = `${BaseUrl}api/promos/${id}`
+  console.log(URL)
+  return axios.get(URL, id, config(token))
+}
+
 export const createProduct = (body, token) => {
   const URL = `${BaseUrl}api/products/`
   return axios.post(URL, body, config(token))
@@ -45,6 +51,12 @@ export const createPromo = (body, token) => {
 
 export const editProduct = (id, body, token) => {
   const URL = `${BaseUrl}api/products/${id}`
-  console.log(URL)
+  // console.log(URL)
+  return axios.patch(URL, body, config(token))
+}
+
+export const editPromo = (id, body, token) => {
+  const URL = `${BaseUrl}api/promos/${id}`
+  // console.log(URL)
   return axios.patch(URL, body, config(token))
 }

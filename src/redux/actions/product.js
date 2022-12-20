@@ -6,7 +6,9 @@ import {
   getPromo,
   createProduct,
   createPromo,
-  editProduct
+  editProduct,
+  getPromoDetail,
+  editPromo,
 } from "../../utils/product";
 
 const getProductPending = () => ({
@@ -99,12 +101,40 @@ const editProductPending = () => ({
 
 const editProductRejected = error => ({
   type: ACTION_STRING.editProduct.concat(ACTION_STRING.rejected),
-  payload: {error},
+  payload: { error },
 });
 
 const editProductFulfilled = data => ({
   type: ACTION_STRING.editProduct.concat(ACTION_STRING.fulfilled),
-  payload: {data},
+  payload: { data },
+});
+
+const getPromoDetailPending = () => ({
+  type: ACTION_STRING.getPromoDetail.concat(ACTION_STRING.pending),
+});
+
+const getPromoDetailRejected = error => ({
+  type: ACTION_STRING.getPromoDetail.concat(ACTION_STRING.rejected),
+  payload: { error },
+});
+
+const getPromoDetailFulfilled = data => ({
+  type: ACTION_STRING.getPromoDetail.concat(ACTION_STRING.fulfilled),
+  payload: { data },
+});
+
+const editPromoPending = () => ({
+  type: ACTION_STRING.editPromo.concat(ACTION_STRING.pending),
+});
+
+const editPromoRejected = error => ({
+  type: ACTION_STRING.editPromo.concat(ACTION_STRING.rejected),
+  payload: { error },
+});
+
+const editPromoFulfilled = data => ({
+  type: ACTION_STRING.editPromo.concat(ACTION_STRING.fulfilled),
+  payload: { data },
 });
 
 const getProductThunk = (cbSuccess, cbDenied) => {
@@ -172,7 +202,7 @@ const getPromoThunk = (query, cbSuccess, cbDenied) => {
 };
 
 const createProductThunk =
-(body, token, cbSuccess, cbDenied) => async dispacth => {
+  (body, token, cbSuccess, cbDenied) => async dispacth => {
     try {
       dispacth(createProductPending());
       const result = await createProduct(body, token);
@@ -185,8 +215,8 @@ const createProductThunk =
     }
   };
 
-  const createPromoThunk =
-(body, token, cbSuccess, cbDenied) => async dispacth => {
+const createPromoThunk =
+  (body, token, cbSuccess, cbDenied) => async dispacth => {
     try {
       dispacth(createPromoPending());
       const result = await createPromo(body, token);
@@ -199,19 +229,49 @@ const createProductThunk =
     }
   };
 
-  const editProductThunk = (id, body, token, cbSuccess, cbDenied) => {
-    return async dispatch => {
-      try {
-        dispatch(editProductPending());
-        const result = await editProduct(id, body, token);
-        dispatch(editProductFulfilled(result.data));
-        typeof cbSuccess === 'function' && cbSuccess();
-      } catch (error) {
-        dispatch(editProductRejected(error));
-        typeof cbDenied === 'function' && cbDenied(error.response.data.msg);
-      }
-    };
+const editProductThunk = (id, body, token, cbSuccess, cbDenied) => {
+  return async dispatch => {
+    try {
+      dispatch(editProductPending());
+      const result = await editProduct(id, body, token);
+      dispatch(editProductFulfilled(result.data));
+      typeof cbSuccess === 'function' && cbSuccess();
+    } catch (error) {
+      dispatch(editProductRejected(error));
+      typeof cbDenied === 'function' && cbDenied(error.response.data.msg);
+    }
   };
+};
+
+const getPromoDetailThunk = (id, token, cbSuccess, cbDenied) => {
+  return async dispatch => {
+    try {
+      dispatch(getPromoDetailPending());
+      // console.log('redux', body);
+      const result = await getPromoDetail(id, token);
+      dispatch(getPromoDetailFulfilled(result.data));
+      typeof cbSuccess === "function" && cbSuccess();
+    } catch (error) {
+      dispatch(getPromoDetailRejected(error));
+      // console.log(error);
+      typeof cbDenied === "function" && cbDenied(error.response.data.msg);
+    }
+  };
+};
+
+const editPromoThunk = (id, body, token, cbSuccess, cbDenied) => {
+  return async dispatch => {
+    try {
+      dispatch(editPromoPending());
+      const result = await editProduct(id, body, token);
+      dispatch(editPromoFulfilled(result.data));
+      typeof cbSuccess === 'function' && cbSuccess();
+    } catch (error) {
+      dispatch(editPromoRejected(error));
+      typeof cbDenied === 'function' && cbDenied(error.response.data.msg);
+    }
+  };
+};
 
 const productAction = {
   getProductThunk,
@@ -220,7 +280,9 @@ const productAction = {
   getPromoThunk,
   createProductThunk,
   createPromoThunk,
-  editProductThunk
+  editProductThunk,
+  getPromoDetailThunk,
+  editPromoThunk
 };
 
 export default productAction;

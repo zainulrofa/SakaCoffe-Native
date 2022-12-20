@@ -14,6 +14,7 @@ const ACTION_STRING = {
   getAll: 'GET_ALL',
   getPromo: 'GET_PROMO',
   getDetail: 'GET_DETAIL',
+  getPromoDetail: 'DETAIL_PROMO',
   createProduct: 'CREATE_PRODUCT',
   createPromo: 'CREATE_PROMO',
   createTransaction: 'CREATE_TRANSACTION',
