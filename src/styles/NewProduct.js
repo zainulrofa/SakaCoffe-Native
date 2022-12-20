@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     borderRadius: 200,
     width: 150,
     height: 150,
+    padding: 100,
     marginTop:10,
   },
 });
