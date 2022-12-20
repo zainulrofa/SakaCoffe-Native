@@ -1,6 +1,29 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5F5F8',
+    paddingVertical: 30,
+  },
+  navbar: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 30
+  },
+  icons: {
+    marginRight: 75,
+    color: 'black',
+    fontSize: 30,
+  },
+  titleNavbar: {
+    fontFamily: 'Poppins-Bold',
+    fontWeight: 'bold',
+    color: 'black',
+    fontSize: 20,
+    marginLeft: 30,
+  },
   all_container: {
     marginLeft: '10%',
     width: '80%',

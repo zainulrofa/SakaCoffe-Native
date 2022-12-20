@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const productReducer = (prevState = initialState, { type, payload }) => {
-    const { getProduct, getDetail, getAll, getPromo, pending, rejected, fulfilled } = ACTION_STRING;
+    const { getProduct, getDetail, getAll, getPromo, createProduct, pending, rejected, fulfilled } = ACTION_STRING;
     switch (type) {
         case getProduct + pending:
             return {
@@ -118,6 +118,27 @@ const productReducer = (prevState = initialState, { type, payload }) => {
                     isError: false,
                     isFulfilled: true,
                     promo: pagePromo > 1 ? [...prevState.promo, ...newPromo] : newPromo
+            };
+        
+            case createProduct.concat(pending):
+                return {
+                  ...prevState,
+                  isLoading: true,
+                  isError: false,
+                };
+          
+              case createProduct.concat(rejected):
+                return {
+                  ...prevState,
+                  isLoading: false,
+                  isError: true,
+                  error: payload.error.response.data.msg,
+                };
+          
+              case createProduct.concat(fulfilled):
+                return {
+                  ...prevState,
+                  isLoading: false,
                 };
 
         default:

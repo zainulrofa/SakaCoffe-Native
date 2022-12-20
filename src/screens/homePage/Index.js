@@ -47,6 +47,23 @@ const Home = () => {
     useEffect(() => {
         dispatch(productAction.getPromoThunk())
     }, [dispatch])
+
+    useEffect(() => {
+        let refresh = false;
+        const focusEvent = navigation.addListener('focus', e => {
+          if (refresh) {
+            dispatch(productAction.getProductThunk());
+            dispatch(productAction.getPromoThunk());
+          }
+        });
+        const blurEvent = navigation.addListener('blur', e => {
+          refresh = true;
+        });
+        return () => {
+          focusEvent();
+          blurEvent();
+        };
+      }, [navigation]);
     return (
         <View style={styles.sectionContainer}>
             <Navbar>
@@ -119,7 +136,10 @@ const Home = () => {
                                 <View>
                                     <Pressable
                                         style={[styles.button, styles.buttonClose]}
-                                        onPress={()=>{navigation.navigate('NewProduct')}}
+                                        onPress={() => {
+                                            setModalVisible(!modalVisible)
+                                            navigation.navigate('NewProduct')
+                                        }}
                                     >
                                         <Text style={styles.textStyle}>New Product</Text>
                                     </Pressable>

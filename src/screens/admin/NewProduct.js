@@ -1,18 +1,128 @@
-import React from 'react';
-import {Text, View, ScrollView, Image, TextInput} from 'react-native';
+import React, { useState } from 'react';
+import {Text, View, ScrollView, Image, TextInput, ToastAndroid} from 'react-native';
 import ButtonOpacity from '../../components/ButtonOpacity';
 import styles from '../../styles/NewProduct';
+import IconComunity from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import camera from '../../assets/images/camera.png';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import productAction from '../../redux/actions/product';
 
 function NewProduct() {
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
+  const [body, setBody] = useState({})
+  const [modalVisible, setModalVisible] = useState(false);
+  const [file, setFile] = useState();
+  const token = useSelector(state => state.auth.userData.token)
+    
+    const changeHandler = (text, name) => {
+      setBody(body => ({...body, [name]: text}));
+  };
+  
+  const createProductHandler = () => {
+    const success = id => {
+      ToastAndroid.showWithGravityAndOffset(
+        `Product Created`,
+        ToastAndroid.SHORT,
+        ToastAndroid.TOP,
+        25,
+        50,
+      );
+      console.log(id);
+      navigation.navigate('ProductDetail', id);
+    };
+    const error = error => {
+      ToastAndroid.showWithGravityAndOffset(
+        `${error}`,
+        ToastAndroid.SHORT,
+        ToastAndroid.TOP,
+        25,
+        50,
+      );
+    };
+    let bodies = new FormData();
+    file &&
+      bodies.append('image', {
+        name: 'test.' + file[0]?.type?.substr(6),
+        type: file[0]?.type,
+        uri:
+          Platform.OS !== 'android' ? 'file://' + file[0]?.uri : file[0]?.uri,
+      });
+    body.productName && bodies.append('productname', body.productName);
+    body.price && bodies.append('price', body.price);
+    body.description && bodies.append('description', body.description);
+    body.categoryId && bodies.append('category_id', body.categoryId);
+
+    dispatch(productAction.createProductThunk(bodies, token, success, error));
+  };
+
+  let cameraLauncher = () => {
+    let options = {
+      storageOptions: {
+        saveToPhotos: true,
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    launchCamera(options, response => {
+      console.log('Response = ', response);
+      if (response.errorMessage) {
+        console.log(response);
+        return ToastAndroid.showWithGravityAndOffset(
+          `Do not have access to open the camera`,
+          ToastAndroid.SHORT,
+          ToastAndroid.TOP,
+          25,
+          50,
+        );
+      }
+      setFile(response.assets);
+    });
+  };
+
+  let libraryLauncher = () => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    launchImageLibrary(options, response => {
+      console.log('Response = ', response);
+      if (response.errorMessage) {
+        return ToastAndroid.showWithGravityAndOffset(
+          `Do not have access to open the library`,
+          ToastAndroid.SHORT,
+          ToastAndroid.TOP,
+          25,
+          50,
+        );
+      }
+      setFile(response.assets);
+    });
+  };
+
   return (
     <>
-      <ScrollView>
+      <ScrollView style={styles.container}>
+      <View style={styles.navbar}>
+        <IconComunity
+          name={'chevron-left'}
+          size={20}
+          style={styles.icons}
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+        <Text style={styles.titleNavbar}>New product</Text>
+      </View>
         <View style={styles.all_container}>
           <View></View>
           <View style={styles.container_up}>
-            <Image source={camera} style={styles.image} />
+            <Image source={file ? {uri: file[0].uri} : camera} style={styles.image} />
             <ButtonOpacity
               color={'#000000'}
               text="Add more picture"
@@ -22,42 +132,59 @@ function NewProduct() {
               width={'60%'}
               marginBottom={10}
               marginTop={20}
-              // onPress={postRegister}
               onPressHandler={
                 {
-                  // onPressIn: () => console.log('Pressed In'),
-                  // onPressOut: () => console.log('Pressed Out'),
-                  // onLongPress: () => navigation.popToTop(),
+                  onPress: cameraLauncher
                 }
               }
             />
-            <TextInput
-              style={styles.input}
-              placeholder="Type product name min. 30 characters"
-              keyboardType="none"
-              placeholderTextColor="#9F9F9F"
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Type product price"
-              keyboardType="numeric"
-              placeholderTextColor="#9F9F9F"
+            <ButtonOpacity
+              color={'#000000'}
+              text="Open Gallery"
+              radius={13}
+              colorText="white"
+              height={40}
+              width={'60%'}
+              marginBottom={10}
+              marginTop={5}
+              // onPress={postRegister}
+              onPressHandler={{
+                onPress: libraryLauncher,
+              }}
             />
           </View>
           <View>
-            <Text style={styles.text}>Delivery info</Text>
+            <Text style={styles.text}>Product Name</Text>
             <TextInput
               style={styles.input_bottom}
-              placeholder="Type delivery information"
+              placeholder="Type product name min. 30 characters"
               keyboardType="none"
               placeholderTextColor="#9F9F9F"
+              onChangeText={text => changeHandler(text, 'productName')}
+            />
+            <Text style={styles.text}>Price</Text>
+            <TextInput
+              style={styles.input_bottom}
+              placeholder="Type product price"
+              keyboardType="numeric"
+              placeholderTextColor="#9F9F9F"
+              onChangeText={text => changeHandler(parseInt(text), 'price')}
+            />
+            <Text style={styles.text}>Category</Text>
+            <TextInput
+              style={styles.input_bottom}
+              placeholder="Type Category id"
+              keyboardType="numeric"
+              placeholderTextColor="#9F9F9F"
+              onChangeText={text => changeHandler(parseInt(text), 'categoryId')}
             />
             <Text style={styles.text}>Description</Text>
             <TextInput
               style={styles.input_bottom}
-              placeholder="Describe your product min. 150 characters"
+              placeholder="Describe your product max. 150 characters"
               keyboardType="none"
               placeholderTextColor="#9F9F9F"
+              onChangeText={text => changeHandler(text, 'description')}
             />
           </View>
           <View>
@@ -70,12 +197,9 @@ function NewProduct() {
               width={'100%'}
               marginBottom={10}
               marginTop={20}
-              // onPress={postRegister}
               onPressHandler={
                 {
-                  // onPressIn: () => console.log('Pressed In'),
-                  // onPressOut: () => console.log('Pressed Out'),
-                  // onLongPress: () => navigation.popToTop(),
+                  onPress: createProductHandler,
                 }
               }
             />
