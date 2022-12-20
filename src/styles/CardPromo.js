@@ -43,7 +43,23 @@ const styles = StyleSheet.create({
           textAlign: 'center',
           color: "#6A4029",
           width: "80%",
-      },
+  },
+  conPencl: {
+    backgroundColor: '#6A4029',
+    width: 35,
+    height: 35,
+    borderRadius: 100,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 15,
+    top: 130,
+    zIndex: 10,
+  },
+  pencil: {
+    color: 'white',
+  },
 })
 
 export default styles

@@ -8,16 +8,16 @@ import Sample from '../../assets/images/product.png';
 import ViewOverflow from 'react-native-view-overflow';
 
 import {
-    View,
-    Image,
-    ScrollView,
-    Text,
-    Pressable,
-    TextInput,
-    TouchableOpacity,
-    useWindowDimensions,
-    FlatList,
-    ActivityIndicator,
+  View,
+  Image,
+  ScrollView,
+  Text,
+  Pressable,
+  TextInput,
+  TouchableOpacity,
+  useWindowDimensions,
+  FlatList,
+  ActivityIndicator,
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
@@ -25,18 +25,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import transactionActions from '../../redux/actions/transaction';
 
 function History() {
-    const navigation = useNavigation()
-    const dispatch = useDispatch()
-    const history = useSelector(state => state.transaction.history)
-    const token = useSelector(state => state.auth.userData.token)
-    const isLoading = useSelector(state => state.transaction.isLoading)
-    const pagination = useSelector(state => state.transaction.pagination)
-    const [query, setQuery]= useState ({page: 1, limit: 7})
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
+  const history = useSelector(state => state.transaction.history)
+  const token = useSelector(state => state.auth.userData.token)
+  const isLoading = useSelector(state => state.transaction.isLoading)
+  const pagination = useSelector(state => state.transaction.pagination)
+  const [query, setQuery] = useState({ page: 1, limit: 7 })
 
 
-    const renderFooter = () => {
-        return (
-            <View
+  const renderFooter = () => {
+    return (
+      <View
         style={{
           flex: 1,
           paddingVertical: 20,
@@ -55,21 +55,21 @@ function History() {
           </Text>
         )}
       </View>
-        )
-    }
+    )
+  }
 
-    const nextItems = () => {
-        if (query.page == pagination.totalPage)
-            return setQuery({...query, page: query.page+1})
-    }
+  const nextItems = () => {
+    if (query.page == pagination.totalPage)
+      return setQuery({ ...query, page: query.page + 1 })
+  }
 
-    useEffect(() => {
-        dispatch(transactionActions.getHistoryThunk(token, query))
-    }, [query])
+  useEffect(() => {
+    dispatch(transactionActions.getHistoryThunk(token, query))
+  }, [query])
 
-    return (
-        <View style={styles.container}>
-      <View style={{padding: 30}}>
+  return (
+    <View style={styles.container}>
+      <View style={{ padding: 30 }}>
         <IconComunity
           name={'chevron-left'}
           size={20}
@@ -87,7 +87,7 @@ function History() {
             <IconComunity
               name={'gesture-tap-hold'}
               size={20}
-              style={{color: 'brown'}}
+              style={{ color: 'brown' }}
             />
             <Text style={styles.swipeText}>Hold on an item to delete</Text>
           </View>
@@ -95,10 +95,20 @@ function History() {
           <Text>Sorry we cant find anything</Text>
         )}
       </View>
-      {history && history.length > 0 && (
+      {isLoading ? (
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 1,
+            paddingTop: 200,
+          }}>
+          <ActivityIndicator size={'large'} color={'#6A4029'} />
+        </View>
+      ) : history && history.length > 0 && (
         <FlatList
           data={history}
-          renderItem={({item}) => {
+          renderItem={({ item }) => {
             return (
               <Card
                 image={item.image}
@@ -114,7 +124,7 @@ function History() {
         />
       )}
     </View>
-    )
+  )
 }
 
 export default History

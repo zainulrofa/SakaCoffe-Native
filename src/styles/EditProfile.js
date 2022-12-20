@@ -18,8 +18,10 @@ const styles = StyleSheet.create({
   },
   titleNavbar: {
     fontFamily: 'Poppins-Bold',
+    fontWeight: 'bold',
     color: 'black',
     fontSize: 20,
+    marginLeft: 30,
   },
   image: {
     width: 130,
@@ -35,14 +37,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    right: 80,
-    top: 100,
+    right: 120,
+    top: 140,
   },
   pencil: {
     color: 'white',
   },
   userinfo: {
-    paddingTop: 10,
+    paddingTop: 40,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

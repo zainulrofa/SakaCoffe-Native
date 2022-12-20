@@ -117,6 +117,7 @@ const Profile = () => {
             <Text
               style={{
                 fontFamily: 'Poppins-Bold',
+                fontWeight: 'bold',
                 fontSize: 18,
                 color: '#fff',
               }}>
