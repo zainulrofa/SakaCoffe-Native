@@ -51,19 +51,19 @@ const Home = () => {
     useEffect(() => {
         let refresh = false;
         const focusEvent = navigation.addListener('focus', e => {
-          if (refresh) {
-            dispatch(productAction.getProductThunk());
-            dispatch(productAction.getPromoThunk());
-          }
+            if (refresh) {
+                dispatch(productAction.getProductThunk());
+                dispatch(productAction.getPromoThunk());
+            }
         });
         const blurEvent = navigation.addListener('blur', e => {
-          refresh = true;
+            refresh = true;
         });
         return () => {
-          focusEvent();
-          blurEvent();
+            focusEvent();
+            blurEvent();
         };
-      }, [navigation]);
+    }, [navigation]);
     return (
         <View style={styles.sectionContainer}>
             <Navbar>
@@ -112,10 +112,8 @@ const Home = () => {
                     </ScrollView>}
                     {role === 'Admin' && !modalVisible &&
                         <Pressable onPress={() => setModalVisible(true)}>
-                        <IconIon name={"add-circle"} style={styles.addCircle} />
-                    </Pressable>}
-                    {}
-                    
+                            <IconIon name={"add-circle"} style={styles.addCircle} />
+                        </Pressable>}
                 </ScrollView>
                 <Modal
                     visible={modalVisible}
