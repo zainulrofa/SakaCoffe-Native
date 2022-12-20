@@ -19,7 +19,8 @@ import {
     ScrollView,
     useWindowDimensions,
     LinearLayout,
-    ActivityIndicator
+    ActivityIndicator,
+    Modal
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,7 +30,7 @@ const Home = () => {
     const navigation = useNavigation()
     const { height } = useWindowDimensions();
     const dispatch = useDispatch();
-    const [open, setOpen] = useState(false)
+    const [modalVisible, setModalVisible] = useState(false);
     const products = useSelector(state => state.product.product)
     const promo = useSelector(state => state.product.promo)
     const isPending = useSelector(state => state.product.isLoading)
@@ -92,11 +93,46 @@ const Home = () => {
                             />
                         })}
                     </ScrollView>}
-                    <Pressable>
+                    {role === 'User' && !modalVisible &&
+                        <Pressable onPress={() => setModalVisible(true)}>
                         <IconIon name={"add-circle"} style={styles.addCircle} />
-                    </Pressable>
+                    </Pressable>}
+                    {}
+                    
                 </ScrollView>
-
+                <Modal
+                    visible={modalVisible}
+                    transparent={true}
+                    onRequestClose={() => {
+                        setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Pressable
+                                    style={[styles.buttonCircle]}
+                                    onPress={() => setModalVisible(!modalVisible)}
+                                >
+                                    <IconIon name={"close-circle-sharp"} style={styles.removeCircle} />
+                                </Pressable>
+                                <View>
+                                    <Pressable
+                                        style={[styles.button, styles.buttonClose]}
+                                        onPress={()=>{navigation.navigate('NewProduct')}}
+                                    >
+                                        <Text style={styles.textStyle}>New Product</Text>
+                                    </Pressable>
+                                    <Pressable
+                                        style={[styles.button, styles.buttonClose]}
+                                    >
+                                        <Text style={styles.textStyle}>New Promo</Text>
+                                    </Pressable>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
             </Navbar>
         </View>
     );
