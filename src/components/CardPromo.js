@@ -14,7 +14,7 @@ const CardPromo = ({ img, name, code}) => {
 
     return (
         <Pressable style={styles.card}>
-            {role === 'User' && <Pressable
+            {role === 'Admin' && <Pressable
                 style={styles.conPencl}
                 onPress={() => setModalVisible(true)}>
                 <IconComunity name={'pencil'} style={styles.pencil} size={20} />

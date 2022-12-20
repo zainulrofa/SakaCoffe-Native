@@ -93,7 +93,7 @@ const Home = () => {
                             />
                         })}
                     </ScrollView>}
-                    {role === 'User' && !modalVisible &&
+                    {role === 'Admin' && !modalVisible &&
                         <Pressable onPress={() => setModalVisible(true)}>
                         <IconIon name={"add-circle"} style={styles.addCircle} />
                     </Pressable>}

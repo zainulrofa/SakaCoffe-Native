@@ -22,7 +22,7 @@ const CardProduct = ({ img, name, price, id }) => {
     };
     return (
         <Pressable style={styles.card} onPress={() => { navigation.navigate("ProductDetail", id) }}>
-            {role === 'User' && <Pressable
+            {role === 'Admin' && <Pressable
                 style={styles.conPencl}
                 onPress={() => setModalVisible(true)}>
                 <IconComunity name={'pencil'} style={styles.pencil} size={20} />

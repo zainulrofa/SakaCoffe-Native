@@ -13,7 +13,7 @@ import { Divider } from '@rneui/themed';
 // import Chat from "../assets/images/Chat.png";
 // import Search from "../assets/images/Search.png";
 import styles from '../styles/Navbar';
-import User from '../assets/images/User.png';
+import User from '../assets/images/default-img.png';
 // import IconUser from '../assets/images/IconUser.png';
 // import IconMenus from '../assets/images/menu.png';
 
@@ -43,6 +43,7 @@ function Navbar({ children }) {
     const { height, width } = useWindowDimensions();
     const dispatch = useDispatch();
     const user = useSelector(state => state.profile.profile);
+    const role = useSelector(state => state.auth.userData.role)
     //   const email = useSelector(state => state.auth.userData.email);
     const auth = useSelector(state => state.auth);
     // console.log(auth.userData.token)
@@ -62,6 +63,7 @@ function Navbar({ children }) {
                 ToastAndroid.SHORT,
                 ToastAndroid.TOP
             )
+            setModalVisible(false);
             navigation.navigate('Welcome')
             clearState(dispatch)
         }
@@ -85,8 +87,9 @@ function Navbar({ children }) {
         return (
             <View>
                 <View style={styles.continerSwipe}>
-                    <Image source={{ uri: user.image }} style={styles.imageDrawer} />
-                    <Text style={styles.username}>{user.username}</Text>
+                    {user.image ? <Image source={{ uri: user.image }} style={styles.imageDrawer} /> :
+                    <Image source={User} style={styles.imageDrawer} />}
+                    <Text style={styles.username}>{user.username ? user.username : `Admin`}</Text>
                     <Text style={styles.email}>{user.email}</Text>
                 </View>
                 <View style={{ paddingLeft: 35, paddingRight: 35, paddingTop: 20, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -95,16 +98,16 @@ function Navbar({ children }) {
                             <Icons name={"user-circle"} size={20} style={styles.imageBottom} label="Close drawer"
                             onPress={() => props.navigation.closeDrawer()}/>
                         </DrawerItem> */}
-                        <Pressable style={styles.containerBottom} onPress={toProfile}>
+                        {!role === 'Admin' && <Pressable style={styles.containerBottom} onPress={toProfile}>
                             {/* <Image source={IconUser} style={styles.imageBottom}/> */}
                             <Icons name={"user-circle"} size={20} style={styles.imageBottom} />
                             <Text style={styles.textBottom}>Edit Profile</Text>
-                        </Pressable>
+                        </Pressable>}
                         <Divider style={{ width: "90%", margin: 3 }} />
                         <Pressable style={styles.containerBottom} onPress={toHistory}>
                             {/* <Image source={IconUser} style={styles.imageBottom}/> */}
                             <IconComunity name={"cart-arrow-down"} size={20} style={styles.imageBottom} />
-                            <Text style={styles.textBottom}>Orders</Text>
+                            <Text style={styles.textBottom}>History</Text>
                         </Pressable>
                         <Divider style={{ width: "90%", margin: 3 }} />
                         <View style={styles.containerBottom}>
