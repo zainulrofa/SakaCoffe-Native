@@ -13,6 +13,7 @@ const ACTION_STRING = {
   getPromo: 'GET_PROMO',
   getDetail: 'GET_DETAIL',
   createProduct: 'CREATE_PRODUCT',
+  createPromo: 'CREATE_PROMO',
   createTransaction: 'CREATE_TRANSACTION',
   transactionData: 'TRANSACTION_DATA',
   checkout: 'TRANSACTION_CHECKOUT',

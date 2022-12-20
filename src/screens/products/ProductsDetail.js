@@ -31,6 +31,7 @@ function ProductDetail(props) {
     const dispatch = useDispatch()
     const productId = props.route.params
     const auth = useSelector(state => state.auth.userData)
+    const role = useSelector(state => state.auth.userData.role)
     const detail = useSelector(state => state.product.detail)
     const [size, setSize] = useState('1')
     const [modalVisible, setModalVisible] = useState(false);
@@ -89,7 +90,9 @@ function ProductDetail(props) {
         <View style={styles.container}>
             <View style={styles.navbar}>
                 <IconComunity name='chevron-left' size={22} style={styles.icon} onPress={() => { navigation.goBack() }} />
-                <IconComunity name='cart-outline' size={22} style={styles.icon} />
+                {role === "Admin" ? <IconComunity name='pencil-outline' size={22} style={styles.icon} />
+                    : <IconComunity name='cart-outline' size={22} style={styles.icon} />
+                }
             </View>
             <View style={styles.main}>
                 <View style={styles.price}>
@@ -141,43 +144,43 @@ function ProductDetail(props) {
                         </TouchableOpacity>
                     </View>
                     <Modal
-                    visible={modalVisible}
-                    transparent={true}
-                    onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                    }}
-                >
-                    <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Are you want to continue transaction?</Text>
-                        <View style={{display: 'flex', flexDirection: 'row'}}>
-                        
-                        <Pressable
-                            onPress={()=>{
-                                addCart()
-                                setModalVisible(false)
-                                return ToastAndroid.showWithGravityAndOffset(
-                                    `Added Product To Cart`,
-                                    ToastAndroid.SHORT,
-                                    ToastAndroid.TOP,
-                                    25,
-                                    50
-                                );
-                            }}
-                            style={[styles.buttonModal, styles.buttonClose]}
-                        >
-                            <Text style={styles.textStyle}>Continue</Text>
+                        visible={modalVisible}
+                        transparent={true}
+                        onRequestClose={() => {
+                            setModalVisible(!modalVisible);
+                        }}
+                    >
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <Text style={styles.modalText}>Are you want to continue transaction?</Text>
+                                <View style={{ display: 'flex', flexDirection: 'row' }}>
+
+                                    <Pressable
+                                        onPress={() => {
+                                            addCart()
+                                            setModalVisible(false)
+                                            return ToastAndroid.showWithGravityAndOffset(
+                                                `Added Product To Cart`,
+                                                ToastAndroid.SHORT,
+                                                ToastAndroid.TOP,
+                                                25,
+                                                50
+                                            );
+                                        }}
+                                        style={[styles.buttonModal, styles.buttonClose]}
+                                    >
+                                        <Text style={styles.textStyle}>Continue</Text>
                                     </Pressable>
                                     <Pressable
-                            style={[styles.buttonModal, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}
-                        >
-                            <Text style={styles.textStyle}>Cancel</Text>
-                        </Pressable>
+                                        style={[styles.buttonModal, styles.buttonClose]}
+                                        onPress={() => setModalVisible(!modalVisible)}
+                                    >
+                                        <Text style={styles.textStyle}>Cancel</Text>
+                                    </Pressable>
+                                </View>
+                            </View>
                         </View>
-                    </View>
-                    </View>
-                </Modal>
+                    </Modal>
                 </View>
             </View>
         </View>

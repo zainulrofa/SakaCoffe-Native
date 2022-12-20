@@ -37,3 +37,8 @@ export const getPromo = (query) => {
   // console.log('util', URL);
   return axios.get(URL, {params: query});
 }
+
+export const createPromo = (body, token) => {
+  const URL = `${BaseUrl}api/promos/`
+  return axios.post(URL, body, config(token))
+}

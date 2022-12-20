@@ -143,6 +143,10 @@ const Home = () => {
                                     </Pressable>
                                     <Pressable
                                         style={[styles.button, styles.buttonClose]}
+                                        onPress={() => {
+                                            setModalVisible(!modalVisible)
+                                            navigation.navigate('NewPromo')
+                                        }}
                                     >
                                         <Text style={styles.textStyle}>New Promo</Text>
                                     </Pressable>

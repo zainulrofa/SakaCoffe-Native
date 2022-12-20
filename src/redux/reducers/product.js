@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const productReducer = (prevState = initialState, { type, payload }) => {
-    const { getProduct, getDetail, getAll, getPromo, createProduct, pending, rejected, fulfilled } = ACTION_STRING;
+    const { getProduct, getDetail, getAll, getPromo, createProduct, createPromo, pending, rejected, fulfilled } = ACTION_STRING;
     switch (type) {
         case getProduct + pending:
             return {
@@ -93,53 +93,74 @@ const productReducer = (prevState = initialState, { type, payload }) => {
                 isFulfilled: true,
                 detail: payload.data.data
             };
-        
-            case getPromo + pending:
-                return {
-                    ...prevState,
-                    isLoading: true,
-                    isError: false,
-                    isFulfilled: false,
-                };
-            case getPromo + rejected:
-                return {
-                    ...prevState,
-                    isError: true,
-                    isLoading: false,
-                    isFulfilled: false,
-                    error: payload.error.response.data.msg,
-                };
+
+        case getPromo + pending:
+            return {
+                ...prevState,
+                isLoading: true,
+                isError: false,
+                isFulfilled: false,
+            };
+        case getPromo + rejected:
+            return {
+                ...prevState,
+                isError: true,
+                isLoading: false,
+                isFulfilled: false,
+                error: payload.error.response.data.msg,
+            };
         case getPromo + fulfilled:
             const newPromo = payload.data.data;
             const pagePromo = payload.data.meta.page;
-                return {
-                    ...prevState,
-                    isLoading: false,
-                    isError: false,
-                    isFulfilled: true,
-                    promo: pagePromo > 1 ? [...prevState.promo, ...newPromo] : newPromo
+            return {
+                ...prevState,
+                isLoading: false,
+                isError: false,
+                isFulfilled: true,
+                promo: pagePromo > 1 ? [...prevState.promo, ...newPromo] : newPromo
             };
-        
-            case createProduct.concat(pending):
-                return {
-                  ...prevState,
-                  isLoading: true,
-                  isError: false,
-                };
-          
-              case createProduct.concat(rejected):
-                return {
-                  ...prevState,
-                  isLoading: false,
-                  isError: true,
-                  error: payload.error.response.data.msg,
-                };
-          
-              case createProduct.concat(fulfilled):
-                return {
-                  ...prevState,
-                  isLoading: false,
-                };
+
+        case createProduct.concat(pending):
+            return {
+                ...prevState,
+                isLoading: true,
+                isError: false,
+            };
+
+        case createProduct.concat(rejected):
+            return {
+                ...prevState,
+                isLoading: false,
+                isError: true,
+                error: payload.error.response.data.msg,
+            };
+
+        case createProduct.concat(fulfilled):
+            return {
+                ...prevState,
+                isLoading: false,
+            };
+
+        case createPromo.concat(pending):
+            return {
+                ...prevState,
+                isLoading: true,
+                isError: false,
+            };
+
+        case createPromo.concat(rejected):
+            return {
+                ...prevState,
+                isLoading: false,
+                isError: true,
+                error: payload.error.response.data.msg,
+            };
+
+        case createPromo.concat(fulfilled):
+            return {
+                ...prevState,
+                isLoading: false,
+            };
 
         default:
             return prevState;
