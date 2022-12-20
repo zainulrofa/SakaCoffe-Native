@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Text, View, ScrollView, Image, TextInput, ToastAndroid} from 'react-native';
+import {Text, View, ScrollView, Image, TextInput, ToastAndroid, Pressable} from 'react-native';
 import ButtonOpacity from '../../components/ButtonOpacity';
 import styles from '../../styles/NewProduct';
 import IconComunity from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,10 +14,10 @@ function NewProduct() {
   const navigation = useNavigation()
   const dispatch = useDispatch()
   const [body, setBody] = useState({})
-  const [modalVisible, setModalVisible] = useState(false);
+  const [category, setCategory] = useState();
   const [file, setFile] = useState();
   const token = useSelector(state => state.auth.userData.token)
-    
+    console.log(category)
     const changeHandler = (text, name) => {
       setBody(body => ({...body, [name]: text}));
   };
@@ -54,7 +54,7 @@ function NewProduct() {
     body.productName && bodies.append('productname', body.productName);
     body.price && bodies.append('price', body.price);
     body.description && bodies.append('description', body.description);
-    body.categoryId && bodies.append('category_id', body.categoryId);
+    category && bodies.append('category_id', category);
 
     dispatch(productAction.createProductThunk(bodies, token, success, error));
   };
@@ -171,13 +171,72 @@ function NewProduct() {
               onChangeText={text => changeHandler(parseInt(text), 'price')}
             />
             <Text style={styles.text}>Category</Text>
-            <TextInput
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.radio}>
+                <Pressable
+                  style={
+                    category === '3'
+                      ? styles.checkedOuter
+                      : styles.unchekedOuter
+                  }
+                  onPress={() => setCategory('3')}>
+                  <View
+                    style={category === '3' ? styles.checkedInner : undefined}
+                  />
+                </Pressable>
+                <Text
+                  style={
+                    category === '3' ? styles.checkedText : styles.uncheckedText
+                  }>
+                  Food
+                </Text>
+              </View>
+              <View style={styles.radio}>
+                <Pressable
+                  style={
+                    category === '1'
+                      ? styles.checkedOuter
+                      : styles.unchekedOuter
+                  }
+                  onPress={() => setCategory('1')}>
+                  <View
+                    style={category === '1' ? styles.checkedInner : undefined}
+                  />
+                </Pressable>
+                <Text
+                  style={
+                    category === '1' ? styles.checkedText : styles.uncheckedText
+                  }>
+                  Coffee
+                </Text>
+              </View>
+              <View style={styles.radio}>
+                <Pressable
+                  style={
+                    category === '2'
+                      ? styles.checkedOuter
+                      : styles.unchekedOuter
+                  }
+                  onPress={() => setCategory('2')}>
+                  <View
+                    style={category === '2' ? styles.checkedInner : undefined}
+                  />
+                </Pressable>
+                <Text
+                  style={
+                    category === '2' ? styles.checkedText : styles.uncheckedText
+                  }>
+                  Non Coffee
+                </Text>
+              </View>
+            </View>
+            {/* <TextInput
               style={styles.input_bottom}
               placeholder="Type Category id"
               keyboardType="numeric"
               placeholderTextColor="#9F9F9F"
               onChangeText={text => changeHandler(parseInt(text), 'categoryId')}
-            />
+            /> */}
             <Text style={styles.text}>Description</Text>
             <TextInput
               style={styles.input_bottom}
