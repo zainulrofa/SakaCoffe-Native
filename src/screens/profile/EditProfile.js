@@ -367,7 +367,7 @@ function EditProfile() {
               <IconComunity
                 name="window-close"
                 size={50}
-                style={styles.icons}
+                style={{fontSize: 30}}
                 onPress={() => setModalVisible(!modal)}
               />
             </View>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   View,
@@ -9,10 +9,13 @@ import {
 } from 'react-native';
 import ButtonOpacity from '../../components/ButtonOpacity';
 import styles from '../../styles/EditPromo';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import camera from '../../assets/images/camera.png';
-import {useSelector, useDispatch} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import productAction from '../../redux/actions/product';
+import IconComunity from 'react-native-vector-icons/MaterialCommunityIcons';
+
 // import promoActions from '../../../redux/actions/promo';
 
 function EditPromo(props) {
@@ -21,12 +24,14 @@ function EditPromo(props) {
   const [body, setBody] = useState({});
   const [file, setFile] = useState();
   const token = useSelector(state => state.auth.userData.token);
-  const detail = useSelector(state => state.promos.detail);
-  const isLoading = useSelector(state => state.promos.isLoading);
+  const detail = useSelector(state => state.product.detailPromo);
+  const isLoading = useSelector(state => state.product.isLoading);
   const id = props.route.params;
 
+  console.log(token)
+
   const changeHandler = (text, name) => {
-    setBody(body => ({...body, [name]: text}));
+    setBody(body => ({ ...body, [name]: text }));
   };
 
   const editPromoHandler = () => {
@@ -65,7 +70,7 @@ function EditPromo(props) {
     console.log(bodies);
     console.log(body);
 
-    dispatch(promoActions.editPromoThunk(id, bodies, token, success, error));
+    dispatch(productAction.editPromoThunk(id, bodies, token, success, error));
   };
 
   let cameraLauncher = () => {
@@ -115,12 +120,23 @@ function EditPromo(props) {
   };
 
   useEffect(() => {
-    dispatch(promoActions.getPromoDetailThunk(id, token));
-  }, [dispatch]);
+    dispatch(productAction.getPromoDetailThunk(id, token));
+  }, [dispatch, token]);
 
   return (
     <>
-      <ScrollView>
+      <ScrollView style={styles.container}>
+        <View style={styles.navbar}>
+          <IconComunity
+            name={'chevron-left'}
+            size={20}
+            style={styles.icons}
+            onPress={() => {
+              navigation.goBack();
+            }}
+          />
+          <Text style={styles.titleNavbar}>New product</Text>
+        </View>
         <View style={styles.all_container}>
           <View></View>
           <View style={styles.container_up}>
@@ -128,10 +144,10 @@ function EditPromo(props) {
               style={styles.image}
               source={
                 file
-                  ? {uri: file[0].uri}
+                  ? { uri: file[0].uri }
                   : detail.image
-                  ? {uri: detail.image}
-                  : camera
+                    ? { uri: detail.image }
+                    : camera
               }
             />
             <ButtonOpacity

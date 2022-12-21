@@ -4,6 +4,7 @@ import {
     Image,
     useWindowDimensions,
     TouchableOpacity,
+    Pressable,
   } from 'react-native';
   import React from 'react';
 //   import {currencyFormatter} from '../../../modules/helper/currencyFormatter';
@@ -14,7 +15,7 @@ const CardAllPromo = ({ image, productName, status, subtotal }) => {
     const { width } = useWindowDimensions();
 
     return (
-      <TouchableOpacity
+      <Pressable
         style={{display: 'flex', paddingLeft: 25, paddingRight: 25, marginVertical: 10}}>
         <View
           style={{
@@ -33,7 +34,7 @@ const CardAllPromo = ({ image, productName, status, subtotal }) => {
             <Text style={styles.cardStatus}>{status}</Text>
           </View>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
   

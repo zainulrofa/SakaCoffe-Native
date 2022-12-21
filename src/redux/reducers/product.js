@@ -7,6 +7,7 @@ const initialState = {
     detailPromo: [],
     promo: [],
     pagination: {},
+    page: {},
     isLoading: false,
     isError: false,
     isFulfilled: false,
@@ -118,7 +119,8 @@ const productReducer = (prevState = initialState, { type, payload }) => {
                 isLoading: false,
                 isError: false,
                 isFulfilled: true,
-                promo: pagePromo > 1 ? [...prevState.promo, ...newPromo] : newPromo
+                promo: pagePromo > 1 ? [...prevState.promo, ...newPromo] : newPromo,
+                page: payload.data.meta
             };
 
         case createProduct.concat(pending):

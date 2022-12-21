@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     },
     price:{
         backgroundColor: '#FFBA33',
-        width: 127,
+        width: 150,
         height: 54,
         position: 'absolute',
         top: -54,
@@ -199,6 +199,17 @@ const styles = StyleSheet.create({
       textNotif:{
         fontFamily: 'Poppins-Bold',
         fontSize: 8,
+    },
+    loadingText:{
+        paddingTop: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
+        position: 'absolute',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems:'flex-end',
+        top: 0,
+        right: 0
       }
 })
 

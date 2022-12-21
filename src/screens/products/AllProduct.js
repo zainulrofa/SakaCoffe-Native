@@ -101,7 +101,12 @@ function Favorite() {
     return (
         <View style={{ flex: 1 }}>
             <View style={styles.navbar}>
-                <IconComunity name={"chevron-left"} size={20} style={styles.icons} onPress={() => { navigation.goBack() }} />
+                <IconComunity name={"chevron-left"} size={20} style={styles.icons}
+                    onPress={() => { navigation.goBack() }}
+                    onLongPress={() => {
+                        navigation.navigate('HomePage');
+                    }}
+                />
                 <Text style={styles.titleNavbar}>Favorite Products</Text>
             </View>
             <View style={{ backgroundColor: "#F9F9F9", }}>
@@ -164,57 +169,57 @@ function Favorite() {
                 </View>
             </ScrollView> */}
             {isLoading ? (
-              <View
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flex: 1,
-                  paddingTop: 200,
-                }}>
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flex: 1,
+                        paddingTop: 200,
+                    }}>
                     <ActivityIndicator size={'large'} color={'#6A4029'} />
-              </View>
+                </View>
             ) : product && product.length == 0 ? (
-              <View
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  paddingTop: 200,
-                }}>
-                <Text style={{fontWeight: 'Bold', color: '#6A4029'}}>
-                  PRODUCT NOT FOUND
-                </Text>
-              </View>
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        paddingTop: 200,
+                    }}>
+                    <Text style={{ fontWeight: 'Bold', color: '#6A4029' }}>
+                        PRODUCT NOT FOUND
+                    </Text>
+                </View>
             ) : (
-              <FlatList
-                data={product}
-                renderItem={({item}) => {
-                  return (
-                    <>
-                      <Pressable
-                        style={styles.card}
-                        key={item.id}
-                        onPress={() => {
-                          navigation.navigate('ProductDetail', item.id);
-                        }}>
-                        <Image
-                          source={{uri: item.image}}
-                          style={styles.imgProduct}
-                        />
-                        <View>
-                          <Text style={styles.titleFood}>
-                            {item.product_name}
-                          </Text>
-                          <Text style={styles.priceFood}>{costing(item.price)}</Text>
-                        </View>
-                      </Pressable>
-                    </>
-                  );
-                }}
-                onEndReached={nextItems}
-                contentContainerStyle={styles.containerCard}
-                numColumns={2}
-                ListFooterComponent={renderFooter}
-              />
+                <FlatList
+                    data={product}
+                    renderItem={({ item }) => {
+                        return (
+                            <>
+                                <Pressable
+                                    style={styles.card}
+                                    key={item.id}
+                                    onPress={() => {
+                                        navigation.navigate('ProductDetail', item.id);
+                                    }}>
+                                    <Image
+                                        source={{ uri: item.image }}
+                                        style={styles.imgProduct}
+                                    />
+                                    <View>
+                                        <Text style={styles.titleFood}>
+                                            {item.product_name}
+                                        </Text>
+                                        <Text style={styles.priceFood}>{costing(item.price)}</Text>
+                                    </View>
+                                </Pressable>
+                            </>
+                        );
+                    }}
+                    onEndReached={nextItems}
+                    contentContainerStyle={styles.containerCard}
+                    numColumns={2}
+                    ListFooterComponent={renderFooter}
+                />
             )}
             <Modal
                 visible={modalVisible}

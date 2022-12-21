@@ -5,6 +5,18 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#F5F5F8",
     },
+    navbar: {
+        backgroundColor: "#F5F5F8",
+        padding: 30,
+        flexDirection: 'row',
+        // alignItems: 'center'
+    },
+    titleNavbar: {
+        fontFamily: 'Poppins-Black',
+        fontWeight: 'bold',
+        color: 'black',
+        fontSize: 17
+    },
     icons: {
         marginRight: 75,
         color: 'black',
@@ -15,7 +27,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 34,
         color: 'black',
-        paddingTop: 30
+        // paddingTop: 30
     },
     swipe: {
         flexDirection: 'row',

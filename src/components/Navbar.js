@@ -90,7 +90,7 @@ function Navbar({ children }) {
                 <View style={styles.continerSwipe}>
                     {user.image ? <Image source={{ uri: user.image }} style={styles.imageDrawer} /> :
                         <Image source={User} style={styles.imageDrawer} />}
-                    <Text style={styles.username}>{user.username ? user.username : `Admin`}</Text>
+                    <Text style={styles.username}>{role ==='Admin' ? 'Admin' : user.username ? user.username : `Your Name`}</Text>
                     <Text style={styles.email}>{user.email}</Text>
                 </View>
                 <View style={{ paddingLeft: 35, paddingRight: 35, paddingTop: 20, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>

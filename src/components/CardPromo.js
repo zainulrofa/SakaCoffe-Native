@@ -16,8 +16,8 @@ const CardPromo = ({ id,img, name, code}) => {
         <Pressable style={styles.card} onPress={() => { navigation.navigate("PromoDetails", id) }}>
             {role === 'Admin' && <Pressable
                 style={styles.conPencl}
-                onPress={() => setModalVisible(true)}>
-                <IconComunity name={'pencil'} style={styles.pencil} size={20} />
+                >
+                <IconComunity name={'pencil'} style={styles.pencil} size={20} onPress={() => { navigation.navigate("EditPromo", id) }} />
             </Pressable>}
             <View style={styles.containerImage}>
                 <Image source={{uri:img}} style={styles.imageCard} />

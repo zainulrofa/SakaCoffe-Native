@@ -17,6 +17,7 @@ import {
     ToastAndroid,
     Pressable,
     Modal,
+    ActivityIndicator,
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
@@ -33,10 +34,11 @@ function ProductDetail(props) {
     const auth = useSelector(state => state.auth.userData)
     const role = useSelector(state => state.auth.userData.role)
     const detail = useSelector(state => state.product.detail)
+    const isLoading = useSelector(state => state.product.isLoading)
     const [size, setSize] = useState('1')
     const [modalVisible, setModalVisible] = useState(false);
 
-    console.log(size)
+    // console.log(size)
 
     const addCart = () => {
         if (!modalVisible) return setModalVisible(true);
@@ -90,13 +92,13 @@ function ProductDetail(props) {
         <View style={styles.container}>
             <View style={styles.navbar}>
                 <IconComunity name='chevron-left' size={22} style={styles.icon} onPress={() => { navigation.goBack() }} />
-                {role === "Admin" ? <IconComunity name='pencil-outline' size={22} style={styles.icon} onPress={() => { navigation.navigate('EditProduct',productId) }}/>
+                {role === "Admin" ? <IconComunity name='pencil-outline' size={22} style={styles.icon} onPress={() => { navigation.navigate('EditProduct', productId) }} />
                     : <IconComunity name='cart-outline' size={22} style={styles.icon} />
                 }
             </View>
             <View style={styles.main}>
                 <View style={styles.price}>
-                    <Text style={styles.priceText}>{costing(detail.price)}</Text>
+                    {isLoading ? <ActivityIndicator size="large" color="black" /> : <Text style={styles.priceText}>{detail.price ? `IDR ${costing(detail.price)}` : '-'}</Text>}
                     {/* {product?.dataPromo === 999 ? (
                     <Text style={styles.priceText}>{detail ? costing(detail.price) : ""}</Text>
                 ):
@@ -106,10 +108,10 @@ function ProductDetail(props) {
                     </>
                 } */}
                 </View>
-                <View style={styles.top}>
+                {isLoading ? <View style={styles.loadingText}><Text style={styles.Title}>Loading...</Text></View> : <View style={styles.top}>
                     <Image source={{ uri: detail.image }} style={styles.product} />
                     <Text style={styles.Title}>{detail.product_name}</Text>
-                </View>
+                </View>}
                 <View style={styles.bottom}>
                     <Text style={styles.firstText}>Delivery only on <Text style={{ color: '#6A4029', fontFamily: 'Poppins-Bold', fontWeight: 'bold' }}>Monday to friday </Text> at <Text style={{ color: '#6A4029', fontFamily: 'Poppins-Bold', fontWeight: 'bold' }}>1 - 7 pm</Text></Text>
                     <Text style={styles.description}>{detail.description}</Text>
@@ -159,13 +161,13 @@ function ProductDetail(props) {
                                         onPress={() => {
                                             addCart()
                                             setModalVisible(false)
-                                            return ToastAndroid.showWithGravityAndOffset(
-                                                `Added Product To Cart`,
-                                                ToastAndroid.SHORT,
-                                                ToastAndroid.TOP,
-                                                25,
-                                                50
-                                            );
+                                            // return ToastAndroid.showWithGravityAndOffset(
+                                            //     `Added Product To Cart`,
+                                            //     ToastAndroid.SHORT,
+                                            //     ToastAndroid.TOP,
+                                            //     25,
+                                            //     50
+                                            // );
                                         }}
                                         style={[styles.buttonModal, styles.buttonClose]}
                                     >
