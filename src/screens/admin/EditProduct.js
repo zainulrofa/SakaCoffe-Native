@@ -120,7 +120,7 @@ function NewProduct(props) {
                             navigation.goBack();
                         }}
                     />
-                    <Text style={styles.titleNavbar}>New product</Text>
+                    <Text style={styles.titleNavbar}>Edit product</Text>
                 </View>
                 <View style={styles.all_container}>
                     <View></View>
@@ -252,7 +252,7 @@ function NewProduct(props) {
                     <View>
                         <ButtonOpacity
                             color={'#6A4029'}
-                            text="Add more picture"
+                            text="Save product"
                             radius={20}
                             colorText="white"
                             height={70}

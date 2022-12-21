@@ -263,7 +263,7 @@ const editPromoThunk = (id, body, token, cbSuccess, cbDenied) => {
   return async dispatch => {
     try {
       dispatch(editPromoPending());
-      const result = await editProduct(id, body, token);
+      const result = await editPromo(id, body, token);
       dispatch(editPromoFulfilled(result.data));
       typeof cbSuccess === 'function' && cbSuccess();
     } catch (error) {

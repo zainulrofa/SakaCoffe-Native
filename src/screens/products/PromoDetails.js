@@ -17,6 +17,7 @@ import {
     ToastAndroid,
     Pressable,
     Modal,
+    ActivityIndicator,
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
@@ -33,6 +34,7 @@ function ProductDetail(props) {
     const token = useSelector(state => state.auth.userData.token)
     const role = useSelector(state => state.auth.userData.role)
     const detail = useSelector(state => state.product.detailPromo)
+    const isLoading = useSelector(state => state.product.isLoading)
     const [size, setSize] = useState('1')
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -77,26 +79,34 @@ function ProductDetail(props) {
     //     })
     // })
 
-    const costing = (price) => {
-        return (
-            parseFloat(price)
-                .toFixed()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
-        );
-    };
+    // const costing = (price) => {
+    //     return (
+    //         parseFloat(price)
+    //             .toFixed()
+    //             .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
+    //     );
+    // };
 
     // useEffect(()=>{console.log(product)})
     return (
         <View style={styles.container}>
             <View style={styles.navbar}>
                 <IconComunity name='chevron-left' size={22} style={styles.icon} onPress={() => { navigation.goBack() }} />
-                {role === "Admin" ? <IconComunity name='pencil-outline' size={22} style={styles.icon} onPress={() => { navigation.navigate('EditProduct',productId) }}/>
+                {role === "Admin" ? <IconComunity name='pencil-outline' size={22} style={styles.icon} onPress={() => { navigation.navigate('EditProduct', productId) }} />
                     : <IconComunity name='cart-outline' size={22} style={styles.icon} />
                 }
             </View>
             <View style={styles.main}>
-                <View style={styles.price}>
-                    <Text style={styles.priceText}></Text>
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    position: 'absolute',
+                    top: -54,
+                    left: 25,
+                }}>
+                    <Text style={styles.priceText}>
+                        {isLoading ? <ActivityIndicator size="large" color="white" /> : <Text style={{color:'white'}}>{detail.code ? (detail.code) : '-'}</Text>}
+                    </Text>
                     {/* {product?.dataPromo === 999 ? (
                     <Text style={styles.priceText}>{detail ? costing(detail.price) : ""}</Text>
                 ):
@@ -107,12 +117,12 @@ function ProductDetail(props) {
                 } */}
                 </View>
                 <View style={styles.top}>
-                    {/* <Image source={{ uri: detail.image }} style={styles.product} /> */}
-                    {/* <Text style={styles.Title}>{detail.product_name}</Text> */}
+                    <Image source={{ uri: detail.image }} style={styles.product} />
+                    <Text style={styles.Title}>{detail.promo_name}</Text>
                 </View>
                 <View style={styles.bottom}>
-                    <Text style={styles.firstText}>Delivery only on <Text style={{ color: '#6A4029', fontFamily: 'Poppins-Bold', fontWeight: 'bold' }}>Monday to friday </Text> at <Text style={{ color: '#6A4029', fontFamily: 'Poppins-Bold', fontWeight: 'bold' }}>1 - 7 pm</Text></Text>
-                    {/* <Text style={styles.description}>{detail.description}</Text> */}
+                    {/* <Text style={styles.firstText}>Delivery only on <Text style={{ color: '#6A4029', fontFamily: 'Poppins-Bold', fontWeight: 'bold' }}>Monday to friday </Text> at <Text style={{ color: '#6A4029', fontFamily: 'Poppins-Bold', fontWeight: 'bold' }}>1 - 7 pm</Text></Text> */}
+                    <Text style={styles.description}>{detail.description}</Text>
                     <Text style={styles.sizeText}> Choose a size</Text>
                     <View style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row' }}>
                         <Pressable style={size === "1" ? styles.selected : styles.button} onPress={() => { setSize("1") }}>

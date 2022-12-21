@@ -24,13 +24,13 @@ export const getAllProduct = (query) => {
 
 export const getProductDetail = (id, token) => {
   const URL = `${BaseUrl}api/products/${id}`
-  return axios.get(URL, id, config(token))
+  return axios.get(URL, config(token))
 }
 
 export const getPromoDetail = (id, token) => {
   const URL = `${BaseUrl}api/promos/${id}`
   console.log(URL)
-  return axios.get(URL, id, config(token))
+  return axios.get(URL, config(token))
 }
 
 export const createProduct = (body, token) => {

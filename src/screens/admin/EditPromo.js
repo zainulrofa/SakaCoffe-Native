@@ -28,7 +28,7 @@ function EditPromo(props) {
   const isLoading = useSelector(state => state.product.isLoading);
   const id = props.route.params;
 
-  console.log(token)
+  console.log(detail)
 
   const changeHandler = (text, name) => {
     setBody(body => ({ ...body, [name]: text }));
@@ -43,6 +43,7 @@ function EditPromo(props) {
         25,
         50,
       );
+      navigation.navigate('HomePage')
     };
     const error = error => {
       ToastAndroid.showWithGravityAndOffset(
@@ -71,6 +72,7 @@ function EditPromo(props) {
     console.log(body);
 
     dispatch(productAction.editPromoThunk(id, bodies, token, success, error));
+
   };
 
   let cameraLauncher = () => {
@@ -121,7 +123,7 @@ function EditPromo(props) {
 
   useEffect(() => {
     dispatch(productAction.getPromoDetailThunk(id, token));
-  }, [dispatch, token]);
+  }, [dispatch]);
 
   return (
     <>
@@ -135,7 +137,7 @@ function EditPromo(props) {
               navigation.goBack();
             }}
           />
-          <Text style={styles.titleNavbar}>New product</Text>
+          <Text style={styles.titleNavbar}>Edit promo</Text>
         </View>
         <View style={styles.all_container}>
           <View></View>
@@ -192,7 +194,7 @@ function EditPromo(props) {
             <TextInput
               style={styles.input_bottom}
               placeholder={
-                detail.discount ? detail.discount : 'Type Discount Percentage'
+                detail.discount ? `${detail.discount}` : 'Type Discount Percentage'
               }
               keyboardType="numeric"
               placeholderTextColor="#9F9F9F"
@@ -212,7 +214,7 @@ function EditPromo(props) {
             <TextInput
               style={styles.input_bottom}
               placeholder={
-                detail.duration ? detail.duration : 'Type Promo Durations'
+                detail.duration ? `${detail.duration}` : 'Type Promo Durations'
               }
               keyboardType="numeric"
               placeholderTextColor="#9F9F9F"
@@ -222,7 +224,7 @@ function EditPromo(props) {
             <TextInput
               style={styles.input_bottom}
               placeholder={
-                detail.min_price ? detail.min_price : 'Type Promo Durations'
+                detail.min_price ? `${detail.min_price}` : 'Type Promo Durations'
               }
               keyboardType="numeric"
               placeholderTextColor="#9F9F9F"
@@ -244,7 +246,7 @@ function EditPromo(props) {
           <View>
             <ButtonOpacity
               color={'#6A4029'}
-              text="Create Promo"
+              text="Save Promo"
               radius={20}
               colorText="white"
               height={70}
