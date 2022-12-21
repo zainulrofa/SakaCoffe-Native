@@ -246,7 +246,7 @@ function EditPromo(props) {
           <View>
             <ButtonOpacity
               color={'#6A4029'}
-              text="Save Promo"
+              text="Save and Update"
               radius={20}
               colorText="white"
               height={70}
